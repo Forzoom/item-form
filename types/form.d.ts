@@ -108,9 +108,18 @@ export interface ItemMultiUploaderMeta extends FormBasicSectionMeta {
     };
 }
 
+export type FormSectionMeta = ItemInputMeta | ItemSelectMeta | ItemCascaderMeta | ItemListMeta | ItemTextareaMeta | ItemButtonGroupMeta | ItemUploaderMeta | ItemMultiUploaderMeta;
+
 export interface ValueText {
     value: any;
     text: string;
+}
+
+export interface ImageInfo {
+    key: string;
+    url: string;
+    /** file: 上传后的文件链接 wechat: 微信临时文件 */
+    mode: 'file' | 'wechat';
 }
 
 export interface CascaderItem {
