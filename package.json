@@ -1,8 +1,10 @@
 {
   "name": "@forzoom/item-form",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "dist/item-form.cjs.js",
+  "module": "dist/item-form.esm.js",
   "license": "MIT",
+  "types": "./types/index.d.ts",
   "scripts": {
     "build": "node build/build.js"
   },
