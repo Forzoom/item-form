@@ -75,6 +75,22 @@ export default {
         onFinish: function() {
             this.visible = false;
         },
+
+        innerFetchList: async function(item) {
+            const ret = await this.fetchList(item);
+            for (let i = 0, len = ret.length ; i < len; i++) {
+                this.$set(this.itemMap, ret[i].id, ret[i]);
+            }
+            return ret;
+        },
+    },
+
+    created: function() {
+        if (this.value && this.value.length) {
+            for (let i = 0, len = this.value.length; i < len; i++) {
+                this.innerFetchList({ id: this.value[i], name: '' });
+            }
+        }
     },
 };
 </script>

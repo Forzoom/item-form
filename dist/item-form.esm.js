@@ -9,7 +9,6 @@ import 'core-js/modules/es.regexp.exec';
 import 'core-js/modules/es.string.split';
 import 'core-js/modules/es.function.name';
 import 'core-js/modules/es.array.map';
-import 'core-js/modules/es.number.constructor';
 import 'core-js/modules/es.symbol';
 import 'core-js/modules/es.symbol.description';
 import 'core-js/modules/es.symbol.async-iterator';
@@ -27,6 +26,7 @@ import 'core-js/modules/es.promise';
 import 'core-js/modules/es.string.iterator';
 import 'core-js/modules/web.dom-collections.for-each';
 import 'core-js/modules/web.dom-collections.iterator';
+import 'core-js/modules/es.number.constructor';
 import 'core-js/modules/es.array.is-array';
 import 'core-js/modules/es.array.filter';
 import 'core-js/modules/es.object.keys';
@@ -1680,6 +1680,15 @@ var script$2 = {
       id: 0,
       name: ''
     });
+
+    if (this.value && this.value.length) {
+      for (var i = 0, len = this.value.length; i < len; i++) {
+        this.innerFetchList({
+          id: this.value[i],
+          name: ''
+        });
+      }
+    }
   }
 };
 
@@ -1734,7 +1743,7 @@ __vue_render__$2._withStripped = true;
 
 var __vue_inject_styles__$2 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-c7cef8d8_0", {
+  inject("data-v-779b403a_0", {
     source: ".cascader__crumb {\n  float: left;\n  padding: 7px 10px;\n  font-size: 12px;\n  line-height: 22px;\n  background-color: #fff;\n  border-bottom: 1px solid #fff;\n}\n.cascader__crumb.selected {\n  border-bottom: 1px solid #fc4548;\n}\n.cascader__level {\n  height: 216px;\n  -webkit-overflow-scrolling: touch;\n  overflow-y: auto;\n}\n.cascader__item {\n  position: relative;\n  padding: 7px 20px;\n  font-size: 12px;\n  line-height: 22px;\n  background-color: #fff;\n}\n.cascader__item:after {\n  left: 15px;\n}\n.cascader__item.selected {\n  color: #fc4548;\n}\n.cascader__item:last-child:after {\n  display: none;\n}\n",
     map: {
       "version": 3,
@@ -1835,6 +1844,49 @@ var script$3 = {
     },
     onFinish: function onFinish() {
       this.visible = false;
+    },
+    innerFetchList: function () {
+      var _innerFetchList = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(item) {
+        var ret, i, len;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.fetchList(item);
+
+              case 2:
+                ret = _context.sent;
+
+                for (i = 0, len = ret.length; i < len; i++) {
+                  this.$set(this.itemMap, ret[i].id, ret[i]);
+                }
+
+                return _context.abrupt("return", ret);
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function innerFetchList(_x) {
+        return _innerFetchList.apply(this, arguments);
+      }
+
+      return innerFetchList;
+    }()
+  },
+  created: function created() {
+    if (this.value && this.value.length) {
+      for (var i = 0, len = this.value.length; i < len; i++) {
+        this.innerFetchList({
+          id: this.value[i],
+          name: ''
+        });
+      }
     }
   }
 };
@@ -1900,7 +1952,7 @@ __vue_render__$3._withStripped = true;
 
 var __vue_inject_styles__$3 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-0a4693bd_0", {
+  inject("data-v-ac00fc9c_0", {
     source: ".item-cascader {\n  background-color: #f2f2f2;\n  border-radius: 5px;\n  padding: 10px 15px;\n  font-size: 14px;\n  line-height: 25px;\n}\n.item-cascader.is-error {\n  box-shadow: 0 0 1px 1px #fc4548;\n}\n.item-cascader.placeholder {\n  color: #c8c8c8;\n}\n",
     map: {
       "version": 3,

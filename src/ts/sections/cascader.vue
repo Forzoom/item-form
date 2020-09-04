@@ -64,6 +64,22 @@ export default class ItemDistrict extends Vue {
     public onFinish() {
         this.visible = false;
     }
+
+    public async innerFetchList(item: CascaderItem) {
+        const ret = await this.fetchList(item);
+        for (let i = 0, len = ret.length ; i < len; i++) {
+            this.$set(this.itemMap, ret[i].id, ret[i]);
+        }
+        return ret;
+    }
+
+    public created() {
+        if (this.value && this.value.length) {
+            for (let i = 0, len = this.value.length; i < len; i++) {
+                this.innerFetchList({ id: this.value[i], name: '' });
+            }
+        }
+    }
 }
 </script>
 
