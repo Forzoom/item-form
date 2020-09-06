@@ -1,7 +1,7 @@
 import { CombinedVueInstance } from 'vue/types/vue';
 import { PropsDefinition } from 'vue/types/options';
 import { ComponentOptions } from 'vue';
-import { ValueText, CascaderItem } from './form';
+import { ValueText, ImageInfo, CascaderItem } from './form';
 
 // buttonGroup
 interface ItemButtonGroupProp {
