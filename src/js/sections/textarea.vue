@@ -5,6 +5,7 @@
         <div class="item-textarea" :class="{'is-error': !isValidate}">
             <textarea class="textarea"
                 v-model="content"
+                :maxlength="max"
                 :placeholder="placeholder"
                 rows="6">
             </textarea>

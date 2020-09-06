@@ -23,6 +23,8 @@ export interface ItemInputMeta extends FormBasicSectionMeta {
         titleHint?: string;
         placeholder?: string;
         type?: 'text' | 'tel';
+        /** 内容最大长度 */
+        max?: number;
         parser?: (str: string) => any;
         formatter?: (val: any) => string;
     };

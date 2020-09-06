@@ -8,6 +8,7 @@
             type="text"
             :name="name"
             :placeholder="placeholder"
+            :maxlength="max"
             v-model="content"
             :readonly="readonly"
             @blur="onBlur" />
@@ -16,6 +17,7 @@
             :class="{ 'is-error': !isValidate }"
             type="tel"
             :name="name"
+            :maxlength="max"
             :placeholder="placeholder"
             v-model="content"
             :readonly="readonly"
@@ -45,7 +47,13 @@ export default {
 
         name: { type: String },
         placeholder: { type: String },
+
+        /** text | tel */
         type: { default: 'text' },
+
+        /** 最大长度 */
+        max: { type: Number },
+
         readonly: { type: Boolean },
         isValidate: { type: Boolean, default: true },
         parser: { type: Function },

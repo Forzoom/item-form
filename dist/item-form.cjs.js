@@ -2060,8 +2060,15 @@ var script$4 = {
     placeholder: {
       type: String
     },
+
+    /** text | tel */
     type: {
       "default": 'text'
+    },
+
+    /** 最大长度 */
+    max: {
+      type: Number
     },
     readonly: {
       type: Boolean
@@ -2130,6 +2137,7 @@ var __vue_render__$4 = function __vue_render__() {
       type: "text",
       name: _vm.name,
       placeholder: _vm.placeholder,
+      maxlength: _vm.max,
       readonly: _vm.readonly
     },
     domProps: {
@@ -2159,6 +2167,7 @@ var __vue_render__$4 = function __vue_render__() {
     attrs: {
       type: "tel",
       name: _vm.name,
+      maxlength: _vm.max,
       placeholder: _vm.placeholder,
       readonly: _vm.readonly
     },
@@ -2184,7 +2193,7 @@ __vue_render__$4._withStripped = true;
 
 var __vue_inject_styles__$4 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-5c8d525f_0", {
+  inject("data-v-36ac4c36_0", {
     source: ".item-input {\n  width: 100%;\n  padding: 10px 15px;\n  font-size: 14px;\n  line-height: 25px;\n  background-color: #f2f2f2;\n  border-radius: 5px;\n  box-sizing: border-box;\n}\n.item-input::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n.item-input.is-error {\n  box-shadow: 0 0 1px 1px #fc4548;\n}\n",
     map: {
       "version": 3,
@@ -2631,6 +2640,7 @@ var __vue_render__$7 = function __vue_render__() {
     }],
     staticClass: "textarea",
     attrs: {
+      maxlength: _vm.max,
       placeholder: _vm.placeholder,
       rows: "6"
     },
@@ -2657,7 +2667,7 @@ __vue_render__$7._withStripped = true;
 
 var __vue_inject_styles__$7 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-50e6e1e4_0", {
+  inject("data-v-409cb033_0", {
     source: ".item-textarea {\n  background-color: #f2f2f2;\n}\n.item-textarea.is-error {\n  box-shadow: 0 0 1px 1px #fc4548;\n}\n.item-textarea .textarea {\n  width: 100%;\n  padding: 10px 15px;\n  font-size: 14px;\n  line-height: 25px;\n  background-color: transparent;\n  border-radius: 5px;\n  box-sizing: border-box;\n  resize: none;\n}\n.item-textarea .textarea::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n.item-textarea .length {\n  padding: 0px 15px 10px;\n  font-size: 12px;\n  line-height: 17px;\n  color: #999;\n  text-align: right;\n}\n",
     map: {
       "version": 3,

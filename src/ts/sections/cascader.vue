@@ -27,7 +27,7 @@ import ItemTitle from './title.vue';
         Cascader,
     },
 })
-export default class ItemDistrict extends Vue {
+export default class ItemCascader extends Vue {
     /** title */
     @Prop({ type: String }) public title?: string;
     /** titleHint */

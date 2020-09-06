@@ -7,6 +7,7 @@
             type="text"
             :name="name"
             :placeholder="placeholder"
+            :maxlength="max"
             v-model="content"
             :readonly="readonly"
             @blur="onBlur" />
@@ -15,6 +16,7 @@
             :class="{ 'is-error': !isValidate }"
             type="tel"
             :name="name"
+            :maxlength="max"
             :placeholder="placeholder"
             v-model="content"
             :readonly="readonly"
@@ -40,7 +42,10 @@ export default class ItemInput extends Vue {
     @Prop() public value!: any;
     @Prop({ type: String }) public name!: any;
     @Prop({ type: String }) public placeholder!: any;
+    /** text | tel */
     @Prop({ default: 'text' }) public type!: any;
+    /** 最大长度 */
+    @Prop({ type: Number }) public max?: number;
     @Prop({ type: Boolean }) public readonly!: any;
     @Prop({ type: Boolean, default: true }) public isValidate!: boolean;
     @Prop({ type: Function }) public parser: any;
