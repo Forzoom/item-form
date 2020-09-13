@@ -1,15 +1,15 @@
 <template>
     <van-popup :value="value" class="list-popup" position="bottom">
-        <li v-if="title" class="title">{{title}}</li>
-        <ul>
-            <li v-for="(item, index) in list"
+        <div v-if="title" class="title">{{title}}</div>
+        <div class="list-popup__list">
+            <div v-for="(item, index) in list"
                 :key="index"
                 @click="onClickItem(item)"
-                class="clearfix"
+                class="list-popup__list-item clearfix"
                 :class="{'color-red': multipleValue[item.value] || item.value === value}">
                 <div class="left">{{item.text}}</div>
-            </li>
-        </ul>
+            </div>
+        </div>
         <MobileButton
             name="white-red"
             tag="div"
@@ -75,52 +75,40 @@ export default class List extends Vue {
         color: @color-red;
     }
 
-    .popup {
-        height: 100%;
-        background-color: @color-white;
-        .btn-cancel {
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-            left: 0;
-            border-radius: 0;
-        }
-    }
     .title {
         position: relative;
+        padding: 10px 0;
         font-size: 16px;
-        line-height: 44px;
+        line-height: 24px;
         font-weight: normal;
         color: @color-font-1;
         text-align: center;
         border-bottom: 0;
     }
-    ul {
+    &__list {
         background-color: #fff;
         height: 100%;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         .left {
             float: left;
+            white-space: normal;
         }
         .right {
             float: right;
         }
-        li {
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            box-sizing: border-box;
-            padding: 0px 15px;
-            height: 45px;
-            font-size: 16px;
-            line-height: 45px;
-            border-bottom: solid 1px #efefef;
-        }
-        li:last-child {
-            margin-bottom: 45px;
-            border-bottom: solid 1px #efefef;
-        }
+    }
+    &__list-item {
+        padding: 10px 15px;
+        font-size: 16px;
+        line-height: 24px;
+        border-bottom: solid 1px #efefef;
+        white-space: normal;
+        box-sizing: border-box;
+    }
+    &__list-item:last-child {
+        margin-bottom: 45px;
+        border-bottom: solid 1px #efefef;
     }
     .bottom-fixed {
         position: fixed;

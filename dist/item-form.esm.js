@@ -2265,12 +2265,14 @@ var __vue_render__$5 = function __vue_render__() {
       value: _vm.value,
       position: "bottom"
     }
-  }, [_vm.title ? _c("li", {
+  }, [_vm.title ? _c("div", {
     staticClass: "title"
-  }, [_vm._v(_vm._s(_vm.title))]) : _vm._e(), _vm._v(" "), _c("ul", _vm._l(_vm.list, function (item, index) {
-    return _c("li", {
+  }, [_vm._v(_vm._s(_vm.title))]) : _vm._e(), _vm._v(" "), _c("div", {
+    staticClass: "list-popup__list"
+  }, _vm._l(_vm.list, function (item, index) {
+    return _c("div", {
       key: index,
-      staticClass: "clearfix",
+      staticClass: "list-popup__list-item clearfix",
       "class": {
         "color-red": _vm.multipleValue[item.value] || item.value === _vm.value
       },
@@ -2302,15 +2304,15 @@ __vue_render__$5._withStripped = true;
 
 var __vue_inject_styles__$5 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-68c69414_0", {
-    source: ".list-popup {\n  height: 100%;\n  color: #333;\n  overflow: scroll;\n}\n.list-popup .color-red {\n  color: #fc4548;\n}\n.list-popup .popup {\n  height: 100%;\n  background-color: #fff;\n}\n.list-popup .popup .btn-cancel {\n  position: fixed;\n  width: 100%;\n  bottom: 0;\n  left: 0;\n  border-radius: 0;\n}\n.list-popup .title {\n  position: relative;\n  font-size: 16px;\n  line-height: 44px;\n  font-weight: normal;\n  color: #333;\n  text-align: center;\n  border-bottom: 0;\n}\n.list-popup ul {\n  background-color: #fff;\n  height: 100%;\n  overflow-y: auto;\n  -webkit-overflow-scrolling: touch;\n}\n.list-popup ul .left {\n  float: left;\n}\n.list-popup ul .right {\n  float: right;\n}\n.list-popup ul li {\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  box-sizing: border-box;\n  padding: 0px 15px;\n  height: 45px;\n  font-size: 16px;\n  line-height: 45px;\n  border-bottom: solid 1px #efefef;\n}\n.list-popup ul li:last-child {\n  margin-bottom: 45px;\n  border-bottom: solid 1px #efefef;\n}\n.list-popup .bottom-fixed {\n  position: fixed;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}\n",
+  inject("data-v-65516a06_0", {
+    source: ".list-popup {\n  height: 100%;\n  color: #333;\n  overflow: scroll;\n}\n.list-popup .color-red {\n  color: #fc4548;\n}\n.list-popup .title {\n  position: relative;\n  padding: 10px 0;\n  font-size: 16px;\n  line-height: 24px;\n  font-weight: normal;\n  color: #333;\n  text-align: center;\n  border-bottom: 0;\n}\n.list-popup__list {\n  background-color: #fff;\n  height: 100%;\n  overflow-y: auto;\n  -webkit-overflow-scrolling: touch;\n}\n.list-popup__list .left {\n  float: left;\n  white-space: normal;\n}\n.list-popup__list .right {\n  float: right;\n}\n.list-popup__list-item {\n  padding: 10px 15px;\n  font-size: 16px;\n  line-height: 24px;\n  border-bottom: solid 1px #efefef;\n  white-space: normal;\n  box-sizing: border-box;\n}\n.list-popup__list-item:last-child {\n  margin-bottom: 45px;\n  border-bottom: solid 1px #efefef;\n}\n.list-popup .bottom-fixed {\n  position: fixed;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}\n",
     map: {
       "version": 3,
       "sources": ["list.vue"],
       "names": [],
-      "mappings": "AAAA;EACE,YAAY;EACZ,WAAW;EACX,gBAAgB;AAClB;AACA;EACE,cAAc;AAChB;AACA;EACE,YAAY;EACZ,sBAAsB;AACxB;AACA;EACE,eAAe;EACf,WAAW;EACX,SAAS;EACT,OAAO;EACP,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,eAAe;EACf,iBAAiB;EACjB,mBAAmB;EACnB,WAAW;EACX,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,sBAAsB;EACtB,YAAY;EACZ,gBAAgB;EAChB,iCAAiC;AACnC;AACA;EACE,WAAW;AACb;AACA;EACE,YAAY;AACd;AACA;EACE,gBAAgB;EAChB,mBAAmB;EACnB,uBAAuB;EACvB,sBAAsB;EACtB,iBAAiB;EACjB,YAAY;EACZ,eAAe;EACf,iBAAiB;EACjB,gCAAgC;AAClC;AACA;EACE,mBAAmB;EACnB,gCAAgC;AAClC;AACA;EACE,eAAe;EACf,OAAO;EACP,QAAQ;EACR,SAAS;AACX",
+      "mappings": "AAAA;EACE,YAAY;EACZ,WAAW;EACX,gBAAgB;AAClB;AACA;EACE,cAAc;AAChB;AACA;EACE,kBAAkB;EAClB,eAAe;EACf,eAAe;EACf,iBAAiB;EACjB,mBAAmB;EACnB,WAAW;EACX,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,sBAAsB;EACtB,YAAY;EACZ,gBAAgB;EAChB,iCAAiC;AACnC;AACA;EACE,WAAW;EACX,mBAAmB;AACrB;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,eAAe;EACf,iBAAiB;EACjB,gCAAgC;EAChC,mBAAmB;EACnB,sBAAsB;AACxB;AACA;EACE,mBAAmB;EACnB,gCAAgC;AAClC;AACA;EACE,eAAe;EACf,OAAO;EACP,QAAQ;EACR,SAAS;AACX",
       "file": "list.vue",
-      "sourcesContent": [".list-popup {\n  height: 100%;\n  color: #333;\n  overflow: scroll;\n}\n.list-popup .color-red {\n  color: #fc4548;\n}\n.list-popup .popup {\n  height: 100%;\n  background-color: #fff;\n}\n.list-popup .popup .btn-cancel {\n  position: fixed;\n  width: 100%;\n  bottom: 0;\n  left: 0;\n  border-radius: 0;\n}\n.list-popup .title {\n  position: relative;\n  font-size: 16px;\n  line-height: 44px;\n  font-weight: normal;\n  color: #333;\n  text-align: center;\n  border-bottom: 0;\n}\n.list-popup ul {\n  background-color: #fff;\n  height: 100%;\n  overflow-y: auto;\n  -webkit-overflow-scrolling: touch;\n}\n.list-popup ul .left {\n  float: left;\n}\n.list-popup ul .right {\n  float: right;\n}\n.list-popup ul li {\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  box-sizing: border-box;\n  padding: 0px 15px;\n  height: 45px;\n  font-size: 16px;\n  line-height: 45px;\n  border-bottom: solid 1px #efefef;\n}\n.list-popup ul li:last-child {\n  margin-bottom: 45px;\n  border-bottom: solid 1px #efefef;\n}\n.list-popup .bottom-fixed {\n  position: fixed;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}\n"]
+      "sourcesContent": [".list-popup {\n  height: 100%;\n  color: #333;\n  overflow: scroll;\n}\n.list-popup .color-red {\n  color: #fc4548;\n}\n.list-popup .title {\n  position: relative;\n  padding: 10px 0;\n  font-size: 16px;\n  line-height: 24px;\n  font-weight: normal;\n  color: #333;\n  text-align: center;\n  border-bottom: 0;\n}\n.list-popup__list {\n  background-color: #fff;\n  height: 100%;\n  overflow-y: auto;\n  -webkit-overflow-scrolling: touch;\n}\n.list-popup__list .left {\n  float: left;\n  white-space: normal;\n}\n.list-popup__list .right {\n  float: right;\n}\n.list-popup__list-item {\n  padding: 10px 15px;\n  font-size: 16px;\n  line-height: 24px;\n  border-bottom: solid 1px #efefef;\n  white-space: normal;\n  box-sizing: border-box;\n}\n.list-popup__list-item:last-child {\n  margin-bottom: 45px;\n  border-bottom: solid 1px #efefef;\n}\n.list-popup .bottom-fixed {\n  position: fixed;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}\n"]
     },
     media: undefined
   });
