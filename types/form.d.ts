@@ -8,16 +8,14 @@ export interface ValidateRule {
     message?: string;
 }
 
-export interface FormBasicSectionMeta {
+export interface ItemFormBasicSectionMeta {
     type: string;
     key: string;
-    titleComponent: boolean;
     validates?: ValidateRule[];
 }
 
-export interface ItemInputMeta extends FormBasicSectionMeta {
+export interface ItemInputMeta extends ItemFormBasicSectionMeta {
     type: 'ItemInput';
-    titleComponent: true;
     props?: {
         title?: string;
         titleHint?: string;
@@ -30,9 +28,8 @@ export interface ItemInputMeta extends FormBasicSectionMeta {
     };
 }
 
-export interface ItemSelectMeta extends FormBasicSectionMeta {
+export interface ItemSelectMeta extends ItemFormBasicSectionMeta {
     type: 'ItemSelect';
-    titleComponent: true;
     props?: {
         title?: string;
         titleHint?: string;
@@ -41,9 +38,8 @@ export interface ItemSelectMeta extends FormBasicSectionMeta {
     };
 }
 
-export interface ItemCascaderMeta extends FormBasicSectionMeta {
+export interface ItemCascaderMeta extends ItemFormBasicSectionMeta {
     type: 'ItemCascader';
-    titleComponent: true;
     props: {
         title?: string;
         titleHint?: string;
@@ -53,33 +49,41 @@ export interface ItemCascaderMeta extends FormBasicSectionMeta {
     };
 }
 
-export interface ItemListMeta extends FormBasicSectionMeta {
+export interface ItemListMeta extends ItemFormBasicSectionMeta {
     type: 'ItemList';
-    titleComponent: true;
     props?: {
+        /** 标题 */
         title?: string;
+        /** 副标题 */
         titleHint?: string;
+        /** 列表title */
+        listTitle?: string;
+        /** 占位 */
         placeholder?: string;
+        /** 选项 */
         options?: ValueText[] | (() => ValueText[]);
+        /** 是否允许多选 */
         multiple?: boolean;
+        /** 显示文本分割 */
         separator?: string;
     };
 }
 
-export interface ItemTextareaMeta extends FormBasicSectionMeta {
+export interface ItemTextareaMeta extends ItemFormBasicSectionMeta {
     type: 'ItemTextarea';
-    titleComponent: true;
     props?: {
+        /** 标题 */
         title?: string;
+        /** 副标题 */
         titleHint?: string;
+        /** 占位 */
         placeholder?: string;
         max?: number;
     };
 }
 
-export interface ItemButtonGroupMeta extends FormBasicSectionMeta {
+export interface ItemButtonGroupMeta extends ItemFormBasicSectionMeta {
     type: 'ItemButtonGroup';
-    titleComponent: true;
     props?: {
         title?: string;
         titleHint?: string;
@@ -88,29 +92,31 @@ export interface ItemButtonGroupMeta extends FormBasicSectionMeta {
     };
 }
 
-export interface ItemUploaderMeta extends FormBasicSectionMeta {
+export interface ItemUploaderMeta extends ItemFormBasicSectionMeta {
     type: 'ItemUploader';
-    titleComponent: false;
     props: {
+        /** 标题 */
         title?: string;
+        /** 副标题 */
         titleHint?: string;
         /** 用于发送上传请求 */
         httpRequest: (imageInfo: ImageInfo) => ImageInfo | Promise<ImageInfo>;
     };
 }
 
-export interface ItemMultiUploaderMeta extends FormBasicSectionMeta {
+export interface ItemMultiUploaderMeta extends ItemFormBasicSectionMeta {
     type: 'ItemMultiUploader';
-    titleComponent: true;
     props: {
+        /** 标题 */
         title?: string;
+        /** 副标题 */
         titleHint?: string;
         size?: number;
         httpRequest: (imageInfo: ImageInfo) => ImageInfo | Promise<ImageInfo>;
     };
 }
 
-export type FormSectionMeta = ItemInputMeta | ItemSelectMeta | ItemCascaderMeta | ItemListMeta | ItemTextareaMeta | ItemButtonGroupMeta | ItemUploaderMeta | ItemMultiUploaderMeta;
+export type ItemFormSectionMeta = ItemInputMeta | ItemSelectMeta | ItemCascaderMeta | ItemListMeta | ItemTextareaMeta | ItemButtonGroupMeta | ItemUploaderMeta | ItemMultiUploaderMeta;
 
 export interface ValueText {
     value: any;

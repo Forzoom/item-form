@@ -3,23 +3,28 @@
     <div class="item-list">
         <ItemTitle :title="title" :titleHint="titleHint" />
         <div class="item-list__inner" :class="{placeholder: isPlaceholder}" @click="onClickSubject">
-            {{valueStr}}
+            {{textStr}}
         </div>
 
-        <!-- <ListPopup v-model="visible" :list="optionList" actionText="确认" :multiple="multiple" @action="onClickAction" /> -->
+        <List v-model="visible"
+            :list="optionList"
+            :title="listTitle"
+            actionText="确认"
+            :multiple="multiple"
+            @action="onClickAction" />
     </div>
 
 </template>
 <script lang="js">
 import ItemTitle from './title.vue';
-
-// import ListPopup from '@/components/popup/listPopup.vue';
+import List from '../components/list.vue';
 
 export default {
     name: 'ItemList',
 
     components: {
         ItemTitle,
+        List,
     },
 
     props: {
@@ -29,10 +34,22 @@ export default {
         /** titleHint */
         titleHint: { type: String },
 
+        /** listTitle */
+        listTitle: { type: String },
+
+        /** value */
         value: {},
+
+        /** 选项 */
         options: {},
+
+        /** 是否允许多选 */
         multiple: { type: Boolean, default: false },
+
+        /** 文本分割 */
         separator: { type: String, default: '、' },
+
+        /** 占位 */
         placeholder: { type: String },
     },
 
@@ -43,9 +60,15 @@ export default {
     },
 
     computed: {
-        valueStr: function() {
+        textStr: function() {
             if (this.multiple) {
-                return this.value.length > 0 ? this.value.join(this.separator) : this.placeholder;
+                const map = {};
+                const len = this.optionList.length;
+                for (let i = 0; i < len; i++) {
+                    const option = this.optionList[i];
+                    map[option.value] = option.text;
+                }
+                return this.value.length > 0 ? this.value.map((value) => map[value]).join(this.separator) : this.placeholder;
             } else {
                 return this.value || this.placeholder;
             }
@@ -85,12 +108,12 @@ export default {
 @import "../../lib/style/mixins.less";
 
 .item-list {
-    background-color: #f2f2f2;
-    border-radius: 5px;
     &__inner {
         padding: 10px 15px;
         font-size: 14px;
         line-height: 25px;
+        background-color: #f2f2f2;
+        border-radius: 5px;
     }
     .placeholder {
         color: #c8c8c8;

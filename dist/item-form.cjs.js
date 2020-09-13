@@ -2226,9 +2226,157 @@ var __vue_component__$4 = /*#__PURE__*/normalizeComponent({
 }, __vue_inject_styles__$4, __vue_script__$4, __vue_scope_id__$4, __vue_is_functional_template__$4, __vue_module_identifier__$4, false, createInjector, undefined, undefined);
 
 var script$5 = {
+  name: 'List',
+  props: {
+    title: {
+      type: String
+    },
+
+    /** 是否显示 */
+    value: {
+      required: true,
+      type: Boolean
+    },
+
+    /** 选择列表 */
+    list: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    },
+
+    /** 是否多选 */
+    multiple: {
+      type: Boolean,
+      "default": false
+    },
+
+    /** 按钮文本 */
+    actionText: {
+      type: String
+    }
+  },
+  data: function data() {
+    return {
+      multipleValue: {}
+    };
+  },
+  computed: {},
+  watch: {},
+  methods: {
+    /**
+     * 选择队伍
+     */
+    onClickItem: function onClickItem(item) {
+      if (!this.multiple) {
+        this.$emit('select', item);
+        this.$emit('input', false);
+      } else {
+        this.$set(this.multipleValue, item.value, !this.multipleValue[item.value]);
+      }
+    },
+    onClickAction: function onClickAction() {
+      if (this.multipleValue) {
+        this.$emit('action', this.multipleValue);
+      } else {
+        this.$emit('action');
+      }
+    }
+  }
+};
+/* script */
+
+var __vue_script__$5 = script$5;
+/* template */
+
+var __vue_render__$5 = function __vue_render__() {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c("van-popup", {
+    staticClass: "list-popup",
+    attrs: {
+      value: _vm.value,
+      position: "bottom"
+    }
+  }, [_vm.title ? _c("li", {
+    staticClass: "title"
+  }, [_vm._v(_vm._s(_vm.title))]) : _vm._e(), _vm._v(" "), _c("ul", _vm._l(_vm.list, function (item, index) {
+    return _c("li", {
+      key: index,
+      staticClass: "clearfix",
+      "class": {
+        "color-red": _vm.multipleValue[item.value] || item.value === _vm.value
+      },
+      on: {
+        click: function click($event) {
+          return _vm.onClickItem(item);
+        }
+      }
+    }, [_c("div", {
+      staticClass: "left"
+    }, [_vm._v(_vm._s(item.text))])]);
+  }), 0), _vm._v(" "), _c("MobileButton", {
+    staticClass: "btn-large bottom-fixed btn-rect",
+    attrs: {
+      name: "white-red",
+      tag: "div",
+      "class-list": ["btn-cancel"],
+      "is-block": true
+    },
+    on: {
+      click: _vm.onClickAction
+    }
+  }, [_c("div", [_vm._v(_vm._s(_vm.actionText))])])], 1);
+};
+
+var __vue_staticRenderFns__$5 = [];
+__vue_render__$5._withStripped = true;
+/* style */
+
+var __vue_inject_styles__$5 = function __vue_inject_styles__(inject) {
+  if (!inject) return;
+  inject("data-v-68c69414_0", {
+    source: ".list-popup {\n  height: 100%;\n  color: #333;\n  overflow: scroll;\n}\n.list-popup .color-red {\n  color: #fc4548;\n}\n.list-popup .popup {\n  height: 100%;\n  background-color: #fff;\n}\n.list-popup .popup .btn-cancel {\n  position: fixed;\n  width: 100%;\n  bottom: 0;\n  left: 0;\n  border-radius: 0;\n}\n.list-popup .title {\n  position: relative;\n  font-size: 16px;\n  line-height: 44px;\n  font-weight: normal;\n  color: #333;\n  text-align: center;\n  border-bottom: 0;\n}\n.list-popup ul {\n  background-color: #fff;\n  height: 100%;\n  overflow-y: auto;\n  -webkit-overflow-scrolling: touch;\n}\n.list-popup ul .left {\n  float: left;\n}\n.list-popup ul .right {\n  float: right;\n}\n.list-popup ul li {\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  box-sizing: border-box;\n  padding: 0px 15px;\n  height: 45px;\n  font-size: 16px;\n  line-height: 45px;\n  border-bottom: solid 1px #efefef;\n}\n.list-popup ul li:last-child {\n  margin-bottom: 45px;\n  border-bottom: solid 1px #efefef;\n}\n.list-popup .bottom-fixed {\n  position: fixed;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}\n",
+    map: {
+      "version": 3,
+      "sources": ["list.vue"],
+      "names": [],
+      "mappings": "AAAA;EACE,YAAY;EACZ,WAAW;EACX,gBAAgB;AAClB;AACA;EACE,cAAc;AAChB;AACA;EACE,YAAY;EACZ,sBAAsB;AACxB;AACA;EACE,eAAe;EACf,WAAW;EACX,SAAS;EACT,OAAO;EACP,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,eAAe;EACf,iBAAiB;EACjB,mBAAmB;EACnB,WAAW;EACX,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,sBAAsB;EACtB,YAAY;EACZ,gBAAgB;EAChB,iCAAiC;AACnC;AACA;EACE,WAAW;AACb;AACA;EACE,YAAY;AACd;AACA;EACE,gBAAgB;EAChB,mBAAmB;EACnB,uBAAuB;EACvB,sBAAsB;EACtB,iBAAiB;EACjB,YAAY;EACZ,eAAe;EACf,iBAAiB;EACjB,gCAAgC;AAClC;AACA;EACE,mBAAmB;EACnB,gCAAgC;AAClC;AACA;EACE,eAAe;EACf,OAAO;EACP,QAAQ;EACR,SAAS;AACX",
+      "file": "list.vue",
+      "sourcesContent": [".list-popup {\n  height: 100%;\n  color: #333;\n  overflow: scroll;\n}\n.list-popup .color-red {\n  color: #fc4548;\n}\n.list-popup .popup {\n  height: 100%;\n  background-color: #fff;\n}\n.list-popup .popup .btn-cancel {\n  position: fixed;\n  width: 100%;\n  bottom: 0;\n  left: 0;\n  border-radius: 0;\n}\n.list-popup .title {\n  position: relative;\n  font-size: 16px;\n  line-height: 44px;\n  font-weight: normal;\n  color: #333;\n  text-align: center;\n  border-bottom: 0;\n}\n.list-popup ul {\n  background-color: #fff;\n  height: 100%;\n  overflow-y: auto;\n  -webkit-overflow-scrolling: touch;\n}\n.list-popup ul .left {\n  float: left;\n}\n.list-popup ul .right {\n  float: right;\n}\n.list-popup ul li {\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  box-sizing: border-box;\n  padding: 0px 15px;\n  height: 45px;\n  font-size: 16px;\n  line-height: 45px;\n  border-bottom: solid 1px #efefef;\n}\n.list-popup ul li:last-child {\n  margin-bottom: 45px;\n  border-bottom: solid 1px #efefef;\n}\n.list-popup .bottom-fixed {\n  position: fixed;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}\n"]
+    },
+    media: undefined
+  });
+};
+/* scoped */
+
+
+var __vue_scope_id__$5 = undefined;
+/* module identifier */
+
+var __vue_module_identifier__$5 = undefined;
+/* functional template */
+
+var __vue_is_functional_template__$5 = false;
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+var __vue_component__$5 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$5,
+  staticRenderFns: __vue_staticRenderFns__$5
+}, __vue_inject_styles__$5, __vue_script__$5, __vue_scope_id__$5, __vue_is_functional_template__$5, __vue_module_identifier__$5, false, createInjector, undefined, undefined);
+
+var script$6 = {
   name: 'ItemList',
   components: {
-    ItemTitle: __vue_component__
+    ItemTitle: __vue_component__,
+    List: __vue_component__$5
   },
   props: {
     /** title */
@@ -2240,16 +2388,31 @@ var script$5 = {
     titleHint: {
       type: String
     },
+
+    /** listTitle */
+    listTitle: {
+      type: String
+    },
+
+    /** value */
     value: {},
+
+    /** 选项 */
     options: {},
+
+    /** 是否允许多选 */
     multiple: {
       type: Boolean,
       "default": false
     },
+
+    /** 文本分割 */
     separator: {
       type: String,
       "default": '、'
     },
+
+    /** 占位 */
     placeholder: {
       type: String
     }
@@ -2260,9 +2423,19 @@ var script$5 = {
     };
   },
   computed: {
-    valueStr: function valueStr() {
+    textStr: function textStr() {
       if (this.multiple) {
-        return this.value.length > 0 ? this.value.join(this.separator) : this.placeholder;
+        var map = {};
+        var len = this.optionList.length;
+
+        for (var i = 0; i < len; i++) {
+          var option = this.optionList[i];
+          map[option.value] = option.text;
+        }
+
+        return this.value.length > 0 ? this.value.map(function (value) {
+          return map[value];
+        }).join(this.separator) : this.placeholder;
       } else {
         return this.value || this.placeholder;
       }
@@ -2295,10 +2468,10 @@ var script$5 = {
 };
 /* script */
 
-var __vue_script__$5 = script$5;
+var __vue_script__$6 = script$6;
 /* template */
 
-var __vue_render__$5 = function __vue_render__() {
+var __vue_render__$6 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -2320,24 +2493,41 @@ var __vue_render__$5 = function __vue_render__() {
     on: {
       click: _vm.onClickSubject
     }
-  }, [_vm._v("\n        " + _vm._s(_vm.valueStr) + "\n    ")])], 1);
+  }, [_vm._v("\n        " + _vm._s(_vm.textStr) + "\n    ")]), _vm._v(" "), _c("List", {
+    attrs: {
+      list: _vm.optionList,
+      title: _vm.listTitle,
+      actionText: "确认",
+      multiple: _vm.multiple
+    },
+    on: {
+      action: _vm.onClickAction
+    },
+    model: {
+      value: _vm.visible,
+      callback: function callback($$v) {
+        _vm.visible = $$v;
+      },
+      expression: "visible"
+    }
+  })], 1);
 };
 
-var __vue_staticRenderFns__$5 = [];
-__vue_render__$5._withStripped = true;
+var __vue_staticRenderFns__$6 = [];
+__vue_render__$6._withStripped = true;
 /* style */
 
-var __vue_inject_styles__$5 = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$6 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-c7dee792_0", {
-    source: ".item-list {\n  background-color: #f2f2f2;\n  border-radius: 5px;\n}\n.item-list__inner {\n  padding: 10px 15px;\n  font-size: 14px;\n  line-height: 25px;\n}\n.item-list .placeholder {\n  color: #c8c8c8;\n}\n",
+  inject("data-v-24338e96_0", {
+    source: ".item-list__inner {\n  padding: 10px 15px;\n  font-size: 14px;\n  line-height: 25px;\n  background-color: #f2f2f2;\n  border-radius: 5px;\n}\n.item-list .placeholder {\n  color: #c8c8c8;\n}\n",
     map: {
       "version": 3,
       "sources": ["list.vue"],
       "names": [],
-      "mappings": "AAAA;EACE,yBAAyB;EACzB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,eAAe;EACf,iBAAiB;AACnB;AACA;EACE,cAAc;AAChB",
+      "mappings": "AAAA;EACE,kBAAkB;EAClB,eAAe;EACf,iBAAiB;EACjB,yBAAyB;EACzB,kBAAkB;AACpB;AACA;EACE,cAAc;AAChB",
       "file": "list.vue",
-      "sourcesContent": [".item-list {\n  background-color: #f2f2f2;\n  border-radius: 5px;\n}\n.item-list__inner {\n  padding: 10px 15px;\n  font-size: 14px;\n  line-height: 25px;\n}\n.item-list .placeholder {\n  color: #c8c8c8;\n}\n"]
+      "sourcesContent": [".item-list__inner {\n  padding: 10px 15px;\n  font-size: 14px;\n  line-height: 25px;\n  background-color: #f2f2f2;\n  border-radius: 5px;\n}\n.item-list .placeholder {\n  color: #c8c8c8;\n}\n"]
     },
     media: undefined
   });
@@ -2345,23 +2535,23 @@ var __vue_inject_styles__$5 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$5 = undefined;
+var __vue_scope_id__$6 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$5 = undefined;
+var __vue_module_identifier__$6 = undefined;
 /* functional template */
 
-var __vue_is_functional_template__$5 = false;
+var __vue_is_functional_template__$6 = false;
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-var __vue_component__$5 = /*#__PURE__*/normalizeComponent({
-  render: __vue_render__$5,
-  staticRenderFns: __vue_staticRenderFns__$5
-}, __vue_inject_styles__$5, __vue_script__$5, __vue_scope_id__$5, __vue_is_functional_template__$5, __vue_module_identifier__$5, false, createInjector, undefined, undefined);
+var __vue_component__$6 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$6,
+  staticRenderFns: __vue_staticRenderFns__$6
+}, __vue_inject_styles__$6, __vue_script__$6, __vue_scope_id__$6, __vue_is_functional_template__$6, __vue_module_identifier__$6, false, createInjector, undefined, undefined);
 
-var script$6 = {
+var script$7 = {
   name: 'ItemSelect',
   components: {
     ItemTitle: __vue_component__
@@ -2438,10 +2628,10 @@ var script$6 = {
     this.content = this.value;
   }
 };
-var __vue_script__$6 = script$6;
+var __vue_script__$7 = script$7;
 /* template */
 
-var __vue_render__$6 = function __vue_render__() {
+var __vue_render__$7 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -2505,11 +2695,11 @@ var __vue_render__$6 = function __vue_render__() {
   })], 2)])])], 1);
 };
 
-var __vue_staticRenderFns__$6 = [];
-__vue_render__$6._withStripped = true;
+var __vue_staticRenderFns__$7 = [];
+__vue_render__$7._withStripped = true;
 /* style */
 
-var __vue_inject_styles__$6 = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$7 = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-5f52e08f_0", {
     source: ".item-select {\n  padding: 10px 15px;\n  font-size: 14px;\n  line-height: 25px;\n  background-color: #f2f2f2;\n  border: 1px solid transparent;\n  border-radius: 5px;\n  box-sizing: border-box;\n}\n.item-select.is-error {\n  box-shadow: 0 0 1px 1px #fc4548;\n}\n.item-select .select {\n  width: 100%;\n  line-height: 25px;\n  background-color: transparent;\n  box-sizing: border-box;\n}\n.item-select .select.padding-left {\n  padding-left: 10px;\n}\n.item-select .select.padding-right {\n  padding-right: 10px;\n}\n.item-select .select.left {\n  text-align: left;\n}\n.item-select .select.right {\n  text-align: right;\n}\n.item-select .select.center {\n  text-align: center;\n}\n.item-select .select.placeholder {\n  color: #c8c8c8;\n}\n.item-select.blank {\n  border-color: #fc4548;\n}\n.item-select.blank .input::-webkit-input-placeholder {\n  color: #fc4548;\n}\n",
@@ -2527,23 +2717,23 @@ var __vue_inject_styles__$6 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$6 = undefined;
+var __vue_scope_id__$7 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$6 = undefined;
+var __vue_module_identifier__$7 = undefined;
 /* functional template */
 
-var __vue_is_functional_template__$6 = false;
+var __vue_is_functional_template__$7 = false;
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-var __vue_component__$6 = /*#__PURE__*/normalizeComponent({
-  render: __vue_render__$6,
-  staticRenderFns: __vue_staticRenderFns__$6
-}, __vue_inject_styles__$6, __vue_script__$6, __vue_scope_id__$6, __vue_is_functional_template__$6, __vue_module_identifier__$6, false, createInjector, undefined, undefined);
+var __vue_component__$7 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$7,
+  staticRenderFns: __vue_staticRenderFns__$7
+}, __vue_inject_styles__$7, __vue_script__$7, __vue_scope_id__$7, __vue_is_functional_template__$7, __vue_module_identifier__$7, false, createInjector, undefined, undefined);
 
-var script$7 = {
+var script$8 = {
   name: 'ItemTextarea',
   components: {
     ItemTitle: __vue_component__
@@ -2609,10 +2799,10 @@ var script$7 = {
 };
 /* script */
 
-var __vue_script__$7 = script$7;
+var __vue_script__$8 = script$8;
 /* template */
 
-var __vue_render__$7 = function __vue_render__() {
+var __vue_render__$8 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -2661,11 +2851,11 @@ var __vue_render__$7 = function __vue_render__() {
   }, [_vm._v(_vm._s(_vm.content.length) + "/" + _vm._s(_vm.max))]) : _vm._e()])], 1);
 };
 
-var __vue_staticRenderFns__$7 = [];
-__vue_render__$7._withStripped = true;
+var __vue_staticRenderFns__$8 = [];
+__vue_render__$8._withStripped = true;
 /* style */
 
-var __vue_inject_styles__$7 = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$8 = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-409cb033_0", {
     source: ".item-textarea {\n  background-color: #f2f2f2;\n}\n.item-textarea.is-error {\n  box-shadow: 0 0 1px 1px #fc4548;\n}\n.item-textarea .textarea {\n  width: 100%;\n  padding: 10px 15px;\n  font-size: 14px;\n  line-height: 25px;\n  background-color: transparent;\n  border-radius: 5px;\n  box-sizing: border-box;\n  resize: none;\n}\n.item-textarea .textarea::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n.item-textarea .length {\n  padding: 0px 15px 10px;\n  font-size: 12px;\n  line-height: 17px;\n  color: #999;\n  text-align: right;\n}\n",
@@ -2683,21 +2873,21 @@ var __vue_inject_styles__$7 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$7 = undefined;
+var __vue_scope_id__$8 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$7 = undefined;
+var __vue_module_identifier__$8 = undefined;
 /* functional template */
 
-var __vue_is_functional_template__$7 = false;
+var __vue_is_functional_template__$8 = false;
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-var __vue_component__$7 = /*#__PURE__*/normalizeComponent({
-  render: __vue_render__$7,
-  staticRenderFns: __vue_staticRenderFns__$7
-}, __vue_inject_styles__$7, __vue_script__$7, __vue_scope_id__$7, __vue_is_functional_template__$7, __vue_module_identifier__$7, false, createInjector, undefined, undefined);
+var __vue_component__$8 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$8,
+  staticRenderFns: __vue_staticRenderFns__$8
+}, __vue_inject_styles__$8, __vue_script__$8, __vue_scope_id__$8, __vue_is_functional_template__$8, __vue_module_identifier__$8, false, createInjector, undefined, undefined);
 /**
  * 班级头像上传逻辑
  *
@@ -2706,7 +2896,7 @@ var __vue_component__$7 = /*#__PURE__*/normalizeComponent({
  */
 
 
-var script$8 = {
+var script$9 = {
   name: 'Uploader',
   props: {
     /** 提示内容 */
@@ -2818,10 +3008,10 @@ var script$8 = {
 };
 /* script */
 
-var __vue_script__$8 = script$8;
+var __vue_script__$9 = script$9;
 /* template */
 
-var __vue_render__$8 = function __vue_render__() {
+var __vue_render__$9 = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -2868,11 +3058,11 @@ var __vue_render__$8 = function __vue_render__() {
   })])]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.hint))])])], 1);
 };
 
-var __vue_staticRenderFns__$8 = [];
-__vue_render__$8._withStripped = true;
+var __vue_staticRenderFns__$9 = [];
+__vue_render__$9._withStripped = true;
 /* style */
 
-var __vue_inject_styles__$8 = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$9 = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-d5c047ac_0", {
     source: ".form-renderer-uploader {\n  position: relative;\n  width: 84px;\n  height: 84px;\n  border-radius: 3px;\n  border: 1px solid #eaeaea;\n  background-color: #fafafa;\n  margin: 0 auto;\n  overflow: hidden;\n}\n.form-renderer-uploader .uploader-mock-background {\n  color: #000;\n  text-align: center;\n  margin-top: 30px;\n}\n.form-renderer-uploader.blank {\n  border: 1px solid #fc4548;\n}\n.form-renderer-uploader.blank .uploader-mock-background {\n  color: #fc4548;\n}\n.form-renderer-uploader .icon {\n  font-size: 23px;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-request.loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n  margin-right: 0;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap {\n  position: relative;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image.loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .remove-wrapper {\n  position: absolute;\n  width: 84px !important;\n  height: 23px !important;\n  left: 0;\n  top: 61px;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove {\n  position: absolute;\n  width: 84px !important;\n  height: 23px !important;\n  line-height: 23px !important;\n  font-size: 14px !important;\n  left: 0;\n  top: 0 !important;\n  color: #666;\n  background-color: rgba(0, 0, 0, 0.5) !important;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:before {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 100% !important;\n  height: 0 !important;\n  content: '更换图片';\n  color: #fff;\n  font-size: 14px;\n  text-align: center;\n  transform: translate(-50%, -50%) rotate(0deg);\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:after {\n  width: 0 !important;\n  height: 0 !important;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active {\n  border-color: #fff;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:before,\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:after {\n  background-color: #fff;\n}\n.form-renderer-uploader .loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n}\n.form-renderer-uploader .upLoaderImg {\n  width: 84px;\n  height: 84px;\n  position: absolute;\n}\n.form-renderer-uploader .uploader-mock-background {\n  position: absolute;\n  top: 0;\n  width: 84px;\n  height: 84px;\n  text-align: center;\n}\n",
@@ -2890,27 +3080,27 @@ var __vue_inject_styles__$8 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$8 = undefined;
+var __vue_scope_id__$9 = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$8 = undefined;
+var __vue_module_identifier__$9 = undefined;
 /* functional template */
 
-var __vue_is_functional_template__$8 = false;
+var __vue_is_functional_template__$9 = false;
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-var __vue_component__$8 = /*#__PURE__*/normalizeComponent({
-  render: __vue_render__$8,
-  staticRenderFns: __vue_staticRenderFns__$8
-}, __vue_inject_styles__$8, __vue_script__$8, __vue_scope_id__$8, __vue_is_functional_template__$8, __vue_module_identifier__$8, false, createInjector, undefined, undefined);
+var __vue_component__$9 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$9,
+  staticRenderFns: __vue_staticRenderFns__$9
+}, __vue_inject_styles__$9, __vue_script__$9, __vue_scope_id__$9, __vue_is_functional_template__$9, __vue_module_identifier__$9, false, createInjector, undefined, undefined);
 
-var script$9 = {
+var script$a = {
   name: 'ItemUploader',
   components: {
     ItemTitle: __vue_component__,
-    Uploader: __vue_component__$8
+    Uploader: __vue_component__$9
   },
   props: {
     value: {},
@@ -3061,10 +3251,10 @@ var script$9 = {
 };
 /* script */
 
-var __vue_script__$9 = script$9;
+var __vue_script__$a = script$a;
 /* template */
 
-var __vue_render__$9 = function __vue_render__() {
+var __vue_render__$a = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -3096,11 +3286,11 @@ var __vue_render__$9 = function __vue_render__() {
   }, [_vm._v(_vm._s(_vm.titleHint))]) : _vm._e()], 1)], 1);
 };
 
-var __vue_staticRenderFns__$9 = [];
-__vue_render__$9._withStripped = true;
+var __vue_staticRenderFns__$a = [];
+__vue_render__$a._withStripped = true;
 /* style */
 
-var __vue_inject_styles__$9 = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$a = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-5a9c2bf2_0", {
     source: ".item-uploader {\n  padding: 20px 0 0px;\n  text-align: center;\n}\n.item-uploader .ro-uploader-wrap {\n  width: 72px;\n  height: 72px;\n}\n.item-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image.loaderImg {\n  background-size: cover;\n  background-position: center;\n}\n.item-uploader .code-title {\n  padding-right: 10px;\n  font-size: 14px;\n  line-height: 20px;\n  color: #101010;\n  text-align: left;\n  overflow: hidden;\n}\n.item-uploader .code-title .item-title {\n  padding: 6px 0 0px;\n}\n.item-uploader .code-title .title-hint {\n  margin-top: 4px;\n  color: #999;\n}\n",
@@ -3118,23 +3308,23 @@ var __vue_inject_styles__$9 = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$9 = undefined;
+var __vue_scope_id__$a = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$9 = undefined;
+var __vue_module_identifier__$a = undefined;
 /* functional template */
 
-var __vue_is_functional_template__$9 = false;
+var __vue_is_functional_template__$a = false;
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-var __vue_component__$9 = /*#__PURE__*/normalizeComponent({
-  render: __vue_render__$9,
-  staticRenderFns: __vue_staticRenderFns__$9
-}, __vue_inject_styles__$9, __vue_script__$9, __vue_scope_id__$9, __vue_is_functional_template__$9, __vue_module_identifier__$9, false, createInjector, undefined, undefined);
+var __vue_component__$a = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$a,
+  staticRenderFns: __vue_staticRenderFns__$a
+}, __vue_inject_styles__$a, __vue_script__$a, __vue_scope_id__$a, __vue_is_functional_template__$a, __vue_module_identifier__$a, false, createInjector, undefined, undefined);
 
-var script$a = {
+var script$b = {
   name: 'ItemMultiUploader',
   components: {
     ItemTitle: __vue_component__
@@ -3338,10 +3528,10 @@ var script$a = {
 };
 /* script */
 
-var __vue_script__$a = script$a;
+var __vue_script__$b = script$b;
 /* template */
 
-var __vue_render__$a = function __vue_render__() {
+var __vue_render__$b = function __vue_render__() {
   var _vm = this;
 
   var _h = _vm.$createElement;
@@ -3372,11 +3562,11 @@ var __vue_render__$a = function __vue_render__() {
   })], 1)], 1);
 };
 
-var __vue_staticRenderFns__$a = [];
-__vue_render__$a._withStripped = true;
+var __vue_staticRenderFns__$b = [];
+__vue_render__$b._withStripped = true;
 /* style */
 
-var __vue_inject_styles__$a = function __vue_inject_styles__(inject) {
+var __vue_inject_styles__$b = function __vue_inject_styles__(inject) {
   if (!inject) return;
   inject("data-v-1ab798e8_0", {
     source: ".item-multi-uploader .uploader-wrap {\n  padding: 8px 18px;\n}\n.item-multi-uploader .ro-uploader-wrap {\n  display: block;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap {\n  float: left;\n  position: relative;\n  margin-right: 0;\n  padding: 2px;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image {\n  vertical-align: middle;\n  width: 109px !important;\n  height: 109px !important;\n  background-position: center center;\n  border-radius: 2px;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove {\n  position: absolute;\n  width: 11px !important;\n  height: 11px !important;\n  font-size: 11px;\n  line-height: 11px;\n  color: rgba(255, 255, 255, 0.6);\n  background-color: rgba(255, 255, 255, 0.8);\n  right: 6px;\n  top: 6px;\n  border-radius: 50%;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:before,\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:after {\n  background-color: #ccc;\n  transform: translate(-50%, -50%) rotateZ(45deg);\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:before {\n  width: 1px;\n  height: 7px !important;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:after {\n  width: 7px !important;\n  height: 1px;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active {\n  border-color: #fff;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:before,\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:after {\n  background-color: #fff;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request {\n  position: relative;\n  width: 109px !important;\n  height: 109px !important;\n  border: 1px dashed #ccc;\n  margin: 2px 0px 0px 2px;\n  border-radius: 2px;\n  box-sizing: border-box;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request:before,\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request:after {\n  background-color: #ccc;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request:before {\n  width: 3px;\n  height: 36.33333333px;\n  border-radius: 3px;\n  background-color: #999;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request:after {\n  width: 36.33333333px;\n  height: 3px;\n  border-radius: 3px;\n  background-color: #999;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request:active {\n  border-color: #999;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request:active:before,\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request:active:after {\n  background-color: #999;\n}\n",
@@ -3394,28 +3584,28 @@ var __vue_inject_styles__$a = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__$a = undefined;
+var __vue_scope_id__$b = undefined;
 /* module identifier */
 
-var __vue_module_identifier__$a = undefined;
+var __vue_module_identifier__$b = undefined;
 /* functional template */
 
-var __vue_is_functional_template__$a = false;
+var __vue_is_functional_template__$b = false;
 /* style inject SSR */
 
 /* style inject shadow dom */
 
-var __vue_component__$a = /*#__PURE__*/normalizeComponent({
-  render: __vue_render__$a,
-  staticRenderFns: __vue_staticRenderFns__$a
-}, __vue_inject_styles__$a, __vue_script__$a, __vue_scope_id__$a, __vue_is_functional_template__$a, __vue_module_identifier__$a, false, createInjector, undefined, undefined);
+var __vue_component__$b = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$b,
+  staticRenderFns: __vue_staticRenderFns__$b
+}, __vue_inject_styles__$b, __vue_script__$b, __vue_scope_id__$b, __vue_is_functional_template__$b, __vue_module_identifier__$b, false, createInjector, undefined, undefined);
 
 exports.ItemButtonGroup = __vue_component__$1;
 exports.ItemCascader = __vue_component__$3;
 exports.ItemInput = __vue_component__$4;
-exports.ItemList = __vue_component__$5;
-exports.ItemMultiUploader = __vue_component__$a;
-exports.ItemSelect = __vue_component__$6;
-exports.ItemTextarea = __vue_component__$7;
+exports.ItemList = __vue_component__$6;
+exports.ItemMultiUploader = __vue_component__$b;
+exports.ItemSelect = __vue_component__$7;
+exports.ItemTextarea = __vue_component__$8;
 exports.ItemTitle = __vue_component__;
-exports.ItemUploader = __vue_component__$9;
+exports.ItemUploader = __vue_component__$a;
