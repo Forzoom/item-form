@@ -3,14 +3,14 @@
     <div class="item-uploader clearfix">
         <Uploader
             ref="uploader"
-            class="fr"
+            class="item-uploader__uploader fr"
             :black="!isValiate"
             @add="onAdd"
             @remove="onRemove"
             @load="onLoad"
             @finish="onFinish">
         </Uploader>
-        <div class="code-title">
+        <div class="item-uploader__title">
             <ItemTitle :title="title"></ItemTitle>
             <div v-if="titleHint" class="title-hint">{{titleHint}}</div>
         </div>
@@ -142,8 +142,11 @@ export default {
             }
         }
     }
+    &__uploader {
+        margin-top: 15px;
+    }
 
-    .code-title {
+    &__title {
         padding-right: 10px;
         .text-normal();
         color: #101010;

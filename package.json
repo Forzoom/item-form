@@ -1,6 +1,6 @@
 {
   "name": "@forzoom/item-form",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "dist/item-form.cjs.js",
   "module": "dist/item-form.esm.js",
   "license": "MIT",

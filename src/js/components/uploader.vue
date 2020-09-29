@@ -146,11 +146,6 @@ export default {
     background-color: #fafafa;
     margin: 0 auto;
     overflow: hidden;
-    .uploader-mock-background {
-        color: #000;
-        text-align: center;
-        margin-top: 30px;
-    }
     &.blank {
         border: 1px solid @color-red;
         .uploader-mock-background {
@@ -230,10 +225,11 @@ export default {
 
     .uploader-mock-background {
         position: absolute;
-        top: 0;
-        width: 84px;
-        height: 84px;
+        top: 50%;
+        left: 50%;
+        color: #000;
         text-align: center;
+        transform: translate(-50%, -50%);
     }
 }
 
