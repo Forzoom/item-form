@@ -1,20 +1,6 @@
-export interface ValidateRule {
-    required?: boolean;
-    pattern?: RegExp;
-    trigger?: 'blur' | 'validate';
-    /** 最大长度 */
-    max?: number;
-    min?: number;
-    message?: string;
-}
+import { FormSection } from '@forzoom/form-renderer/types/form';
 
-export interface ItemFormBasicSectionMeta {
-    type: string;
-    key: string;
-    validates?: ValidateRule[];
-}
-
-export interface ItemInputMeta extends ItemFormBasicSectionMeta {
+export interface ItemInputMeta extends FormSection {
     type: 'ItemInput';
     props?: {
         title?: string;
@@ -28,7 +14,7 @@ export interface ItemInputMeta extends ItemFormBasicSectionMeta {
     };
 }
 
-export interface ItemSelectMeta extends ItemFormBasicSectionMeta {
+export interface ItemSelectMeta extends FormSection {
     type: 'ItemSelect';
     props?: {
         title?: string;
@@ -38,7 +24,7 @@ export interface ItemSelectMeta extends ItemFormBasicSectionMeta {
     };
 }
 
-export interface ItemCascaderMeta extends ItemFormBasicSectionMeta {
+export interface ItemCascaderMeta extends FormSection {
     type: 'ItemCascader';
     props: {
         title?: string;
@@ -49,7 +35,7 @@ export interface ItemCascaderMeta extends ItemFormBasicSectionMeta {
     };
 }
 
-export interface ItemListMeta extends ItemFormBasicSectionMeta {
+export interface ItemListMeta extends FormSection {
     type: 'ItemList';
     props?: {
         /** 标题 */
@@ -69,7 +55,7 @@ export interface ItemListMeta extends ItemFormBasicSectionMeta {
     };
 }
 
-export interface ItemTextareaMeta extends ItemFormBasicSectionMeta {
+export interface ItemTextareaMeta extends FormSection {
     type: 'ItemTextarea';
     props?: {
         /** 标题 */
@@ -82,7 +68,7 @@ export interface ItemTextareaMeta extends ItemFormBasicSectionMeta {
     };
 }
 
-export interface ItemButtonGroupMeta extends ItemFormBasicSectionMeta {
+export interface ItemButtonGroupMeta extends FormSection {
     type: 'ItemButtonGroup';
     props?: {
         title?: string;
@@ -92,7 +78,7 @@ export interface ItemButtonGroupMeta extends ItemFormBasicSectionMeta {
     };
 }
 
-export interface ItemUploaderMeta extends ItemFormBasicSectionMeta {
+export interface ItemUploaderMeta extends FormSection {
     type: 'ItemUploader';
     props: {
         /** 标题 */
@@ -104,7 +90,7 @@ export interface ItemUploaderMeta extends ItemFormBasicSectionMeta {
     };
 }
 
-export interface ItemMultiUploaderMeta extends ItemFormBasicSectionMeta {
+export interface ItemMultiUploaderMeta extends FormSection {
     type: 'ItemMultiUploader';
     props: {
         /** 标题 */

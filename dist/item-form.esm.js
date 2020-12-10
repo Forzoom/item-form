@@ -1,13 +1,6 @@
 import 'core-js/modules/es.array.index-of';
-import 'core-js/modules/es.array.slice';
-import 'core-js/modules/es.object.define-property';
-import 'core-js/modules/es.date.to-string';
-import 'core-js/modules/es.object.to-string';
-import 'core-js/modules/es.regexp.to-string';
-import 'core-js/modules/es.array.join';
-import 'core-js/modules/es.regexp.exec';
-import 'core-js/modules/es.string.split';
 import 'core-js/modules/es.function.name';
+import 'core-js/modules/es.array.join';
 import 'core-js/modules/es.array.map';
 import 'core-js/modules/es.symbol';
 import 'core-js/modules/es.symbol.description';
@@ -16,353 +9,21 @@ import 'core-js/modules/es.symbol.iterator';
 import 'core-js/modules/es.symbol.to-string-tag';
 import 'core-js/modules/es.array.for-each';
 import 'core-js/modules/es.array.iterator';
-import 'core-js/modules/es.array.reverse';
+import 'core-js/modules/es.array.slice';
 import 'core-js/modules/es.json.to-string-tag';
 import 'core-js/modules/es.math.to-string-tag';
-import 'core-js/modules/es.object.create';
 import 'core-js/modules/es.object.get-prototype-of';
 import 'core-js/modules/es.object.set-prototype-of';
+import 'core-js/modules/es.object.to-string';
 import 'core-js/modules/es.promise';
+import 'core-js/modules/es.regexp.to-string';
 import 'core-js/modules/es.string.iterator';
 import 'core-js/modules/web.dom-collections.for-each';
 import 'core-js/modules/web.dom-collections.iterator';
 import 'core-js/modules/es.number.constructor';
-import 'core-js/modules/es.array.is-array';
 import 'core-js/modules/es.array.filter';
 import 'core-js/modules/es.object.keys';
 import 'core-js/modules/es.array.concat';
-
-function createCommonjsModule(fn, module) {
-  return module = {
-    exports: {}
-  }, fn(module, module.exports), module.exports;
-}
-
-var _global = createCommonjsModule(function (module) {
-  // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
-  var global = module.exports = typeof window != 'undefined' && window.Math == Math ? window : typeof self != 'undefined' && self.Math == Math ? self // eslint-disable-next-line no-new-func
-  : Function('return this')();
-  if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
-});
-
-var _core = createCommonjsModule(function (module) {
-  var core = module.exports = {
-    version: '2.6.11'
-  };
-  if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
-});
-
-var _core_1 = _core.version;
-
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function _typeof(obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
-
-  return _typeof(obj);
-}
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-var _isObject = function _isObject(it) {
-  return _typeof(it) === 'object' ? it !== null : typeof it === 'function';
-};
-
-var _anObject = function _anObject(it) {
-  if (!_isObject(it)) throw TypeError(it + ' is not an object!');
-  return it;
-};
-
-var _fails = function _fails(exec) {
-  try {
-    return !!exec();
-  } catch (e) {
-    return true;
-  }
-};
-
-var _descriptors = !_fails(function () {
-  return Object.defineProperty({}, 'a', {
-    get: function get() {
-      return 7;
-    }
-  }).a != 7;
-});
-
-var document$1 = _global.document; // typeof document.createElement is 'object' in old IE
-
-var is = _isObject(document$1) && _isObject(document$1.createElement);
-
-var _domCreate = function _domCreate(it) {
-  return is ? document$1.createElement(it) : {};
-};
-
-var _ie8DomDefine = !_descriptors && !_fails(function () {
-  return Object.defineProperty(_domCreate('div'), 'a', {
-    get: function get() {
-      return 7;
-    }
-  }).a != 7;
-}); // instead of the ES6 spec version, we didn't implement @@toPrimitive case
-// and the second argument - flag - preferred type is a string
-
-
-var _toPrimitive = function _toPrimitive(it, S) {
-  if (!_isObject(it)) return it;
-  var fn, val;
-  if (S && typeof (fn = it.toString) == 'function' && !_isObject(val = fn.call(it))) return val;
-  if (typeof (fn = it.valueOf) == 'function' && !_isObject(val = fn.call(it))) return val;
-  if (!S && typeof (fn = it.toString) == 'function' && !_isObject(val = fn.call(it))) return val;
-  throw TypeError("Can't convert object to primitive value");
-};
-
-var dP = Object.defineProperty;
-var f = _descriptors ? Object.defineProperty : function defineProperty(O, P, Attributes) {
-  _anObject(O);
-
-  P = _toPrimitive(P, true);
-
-  _anObject(Attributes);
-
-  if (_ie8DomDefine) try {
-    return dP(O, P, Attributes);
-  } catch (e) {
-    /* empty */
-  }
-  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported!');
-  if ('value' in Attributes) O[P] = Attributes.value;
-  return O;
-};
-var _objectDp = {
-  f: f
-};
-
-var _propertyDesc = function _propertyDesc(bitmap, value) {
-  return {
-    enumerable: !(bitmap & 1),
-    configurable: !(bitmap & 2),
-    writable: !(bitmap & 4),
-    value: value
-  };
-};
-
-var _hide = _descriptors ? function (object, key, value) {
-  return _objectDp.f(object, key, _propertyDesc(1, value));
-} : function (object, key, value) {
-  object[key] = value;
-  return object;
-};
-
-var hasOwnProperty = {}.hasOwnProperty;
-
-var _has = function _has(it, key) {
-  return hasOwnProperty.call(it, key);
-};
-
-var id = 0;
-var px = Math.random();
-
-var _uid = function _uid(key) {
-  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
-};
-
-var _shared = createCommonjsModule(function (module) {
-  var SHARED = '__core-js_shared__';
-  var store = _global[SHARED] || (_global[SHARED] = {});
-  (module.exports = function (key, value) {
-    return store[key] || (store[key] = value !== undefined ? value : {});
-  })('versions', []).push({
-    version: _core.version,
-    mode: 'global',
-    copyright: '© 2019 Denis Pushkarev (zloirock.ru)'
-  });
-});
-
-var _functionToString = _shared('native-function-to-string', Function.toString);
-
-var _redefine = createCommonjsModule(function (module) {
-  var SRC = _uid('src');
-
-  var TO_STRING = 'toString';
-
-  var TPL = ('' + _functionToString).split(TO_STRING);
-
-  _core.inspectSource = function (it) {
-    return _functionToString.call(it);
-  };
-
-  (module.exports = function (O, key, val, safe) {
-    var isFunction = typeof val == 'function';
-    if (isFunction) _has(val, 'name') || _hide(val, 'name', key);
-    if (O[key] === val) return;
-    if (isFunction) _has(val, SRC) || _hide(val, SRC, O[key] ? '' + O[key] : TPL.join(String(key)));
-
-    if (O === _global) {
-      O[key] = val;
-    } else if (!safe) {
-      delete O[key];
-
-      _hide(O, key, val);
-    } else if (O[key]) {
-      O[key] = val;
-    } else {
-      _hide(O, key, val);
-    } // add fake Function#toString for correct work wrapped methods / constructors with methods like LoDash isNative
-
-  })(Function.prototype, TO_STRING, function toString() {
-    return typeof this == 'function' && this[SRC] || _functionToString.call(this);
-  });
-});
-
-var _aFunction = function _aFunction(it) {
-  if (typeof it != 'function') throw TypeError(it + ' is not a function!');
-  return it;
-};
-
-var _ctx = function _ctx(fn, that, length) {
-  _aFunction(fn);
-
-  if (that === undefined) return fn;
-
-  switch (length) {
-    case 1:
-      return function (a) {
-        return fn.call(that, a);
-      };
-
-    case 2:
-      return function (a, b) {
-        return fn.call(that, a, b);
-      };
-
-    case 3:
-      return function (a, b, c) {
-        return fn.call(that, a, b, c);
-      };
-  }
-
-  return function ()
-  /* ...args */
-  {
-    return fn.apply(that, arguments);
-  };
-};
-
-var PROTOTYPE = 'prototype';
-
-var $export = function $export(type, name, source) {
-  var IS_FORCED = type & $export.F;
-  var IS_GLOBAL = type & $export.G;
-  var IS_STATIC = type & $export.S;
-  var IS_PROTO = type & $export.P;
-  var IS_BIND = type & $export.B;
-  var target = IS_GLOBAL ? _global : IS_STATIC ? _global[name] || (_global[name] = {}) : (_global[name] || {})[PROTOTYPE];
-  var exports = IS_GLOBAL ? _core : _core[name] || (_core[name] = {});
-  var expProto = exports[PROTOTYPE] || (exports[PROTOTYPE] = {});
-  var key, own, out, exp;
-  if (IS_GLOBAL) source = name;
-
-  for (key in source) {
-    // contains in native
-    own = !IS_FORCED && target && target[key] !== undefined; // export native or passed
-
-    out = (own ? target : source)[key]; // bind timers to global for call from export context
-
-    exp = IS_BIND && own ? _ctx(out, _global) : IS_PROTO && typeof out == 'function' ? _ctx(Function.call, out) : out; // extend global
-
-    if (target) _redefine(target, key, out, type & $export.U); // export
-
-    if (exports[key] != out) _hide(exports, key, exp);
-    if (IS_PROTO && expProto[key] != out) expProto[key] = out;
-  }
-};
-
-_global.core = _core; // type bitmap
-
-$export.F = 1; // forced
-
-$export.G = 2; // global
-
-$export.S = 4; // static
-
-$export.P = 8; // proto
-
-$export.B = 16; // bind
-
-$export.W = 32; // wrap
-
-$export.U = 64; // safe
-
-$export.R = 128; // real proto method for `library`
-
-var _export = $export;
-var navigator$1 = _global.navigator;
-
-var _userAgent = navigator$1 && navigator$1.userAgent || '';
-
-var slice = [].slice;
-var MSIE = /MSIE .\./.test(_userAgent); // <- dirty ie9- check
-
-var wrap = function wrap(set) {
-  return function (fn, time
-  /* , ...args */
-  ) {
-    var boundArgs = arguments.length > 2;
-    var args = boundArgs ? slice.call(arguments, 2) : false;
-    return set(boundArgs ? function () {
-      // eslint-disable-next-line no-new-func
-      (typeof fn == 'function' ? fn : Function(fn)).apply(this, args);
-    } : fn, time);
-  };
-};
-
-_export(_export.G + _export.B + _export.F * MSIE, {
-  setTimeout: wrap(_global.setTimeout),
-  setInterval: wrap(_global.setInterval)
-});
-
 !function (e) {
   var t,
       n,
@@ -421,7 +82,7 @@ var script = {
     },
     isRequired: {
       type: Boolean,
-      "default": false
+      default: false
     }
   },
   data: function data() {
@@ -653,7 +314,7 @@ var script$1 = {
     },
     readonly: {
       type: Boolean,
-      "default": false
+      default: false
     }
   },
   data: function data() {
@@ -697,7 +358,7 @@ var __vue_render__$1 = function __vue_render__() {
       }
     }, [_c("MobileButton", {
       staticClass: "team-level",
-      "class": {
+      class: {
         selected: _vm.value == option.value
       },
       attrs: {
@@ -750,6 +411,64 @@ var __vue_component__$1 = /*#__PURE__*/normalizeComponent({
   render: __vue_render__$1,
   staticRenderFns: __vue_staticRenderFns__$1
 }, __vue_inject_styles__$1, __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, createInjector, undefined, undefined);
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+function createCommonjsModule(fn, module) {
+  return module = {
+    exports: {}
+  }, fn(module, module.exports), module.exports;
+}
 
 var runtime_1 = createCommonjsModule(function (module) {
   /**
@@ -1496,7 +1215,7 @@ var script$2 = {
     /** 默认显示的位置内容 */
     value: {
       type: Array,
-      "default": function _default() {
+      default: function _default() {
         return [];
       }
     },
@@ -1504,7 +1223,7 @@ var script$2 = {
     /** 最大的level，默认为3，只允许显示 <= maxLevel 的内容 */
     maxLevel: {
       type: Number,
-      "default": 3
+      default: 3
     },
 
     /** 获取列表数据 */
@@ -1726,7 +1445,7 @@ var __vue_render__$2 = function __vue_render__() {
     return _c("div", {
       key: index,
       staticClass: "cascader__crumb",
-      "class": {
+      class: {
         selected: _vm.level == index
       },
       on: {
@@ -1741,7 +1460,7 @@ var __vue_render__$2 = function __vue_render__() {
     return _c("div", {
       key: item.id,
       staticClass: "cascader__item after-line",
-      "class": {
+      class: {
         selected: item.id == _vm.value[_vm.level]
       },
       on: {
@@ -1809,13 +1528,13 @@ var script$3 = {
     },
     value: {
       type: Array,
-      "default": function _default() {
+      default: function _default() {
         return [];
       }
     },
     placeholder: {
       type: String,
-      "default": '请选择'
+      default: '请选择'
     },
     fetchList: {
       required: true,
@@ -1823,7 +1542,7 @@ var script$3 = {
     },
     isValidate: {
       type: Boolean,
-      "default": true
+      default: true
     }
   },
   data: function data() {
@@ -1930,7 +1649,7 @@ var __vue_render__$3 = function __vue_render__() {
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "item-cascader",
-    "class": {
+    class: {
       placeholder: _vm.name.length === 0,
       "is-error": !_vm.isValidate
     },
@@ -2030,7 +1749,7 @@ var script$4 = {
 
     /** text | tel */
     type: {
-      "default": 'text'
+      default: 'text'
     },
 
     /** 最大长度 */
@@ -2042,7 +1761,7 @@ var script$4 = {
     },
     isValidate: {
       type: Boolean,
-      "default": true
+      default: true
     },
     parser: {
       type: Function
@@ -2097,7 +1816,7 @@ var __vue_render__$4 = function __vue_render__() {
       expression: "content"
     }],
     staticClass: "item-input",
-    "class": {
+    class: {
       "is-error": !_vm.isValidate
     },
     attrs: {
@@ -2128,7 +1847,7 @@ var __vue_render__$4 = function __vue_render__() {
       expression: "content"
     }],
     staticClass: "item-input",
-    "class": {
+    class: {
       "is-error": !_vm.isValidate
     },
     attrs: {
@@ -2208,7 +1927,7 @@ var script$5 = {
     /** 选择列表 */
     list: {
       type: Array,
-      "default": function _default() {
+      default: function _default() {
         return [];
       }
     },
@@ -2216,7 +1935,7 @@ var script$5 = {
     /** 是否多选 */
     multiple: {
       type: Boolean,
-      "default": false
+      default: false
     },
 
     /** 按钮文本 */
@@ -2278,7 +1997,7 @@ var __vue_render__$5 = function __vue_render__() {
     return _c("div", {
       key: index,
       staticClass: "list-popup__list-item clearfix",
-      "class": {
+      class: {
         "color-red": _vm.multipleValue[item.value] || item.value === _vm.value
       },
       on: {
@@ -2372,13 +2091,13 @@ var script$6 = {
     /** 是否允许多选 */
     multiple: {
       type: Boolean,
-      "default": false
+      default: false
     },
 
     /** 文本分割 */
     separator: {
       type: String,
-      "default": '、'
+      default: '、'
     },
 
     /** 占位 */
@@ -2456,7 +2175,7 @@ var __vue_render__$6 = function __vue_render__() {
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "item-list__inner",
-    "class": {
+    class: {
       placeholder: _vm.isPlaceholder
     },
     on: {
@@ -2548,25 +2267,25 @@ var script$7 = {
     /** 是否提示为空 */
     blank: {
       type: Boolean,
-      "default": false
+      default: false
     },
 
     /** 对齐 */
     align: {
       type: String,
-      "default": 'left'
+      default: 'left'
     },
 
     /** 是否禁用 */
     disabled: {
       type: Boolean,
-      "default": false
+      default: false
     },
 
     /** 选择内容 */
     options: {
       type: Array,
-      "default": function _default() {
+      default: function _default() {
         return [];
       }
     },
@@ -2574,7 +2293,7 @@ var script$7 = {
     /** 是否错误 */
     isValidate: {
       type: Boolean,
-      "default": true
+      default: true
     }
   },
   data: function data() {
@@ -2616,7 +2335,7 @@ var __vue_render__$7 = function __vue_render__() {
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "item-select",
-    "class": {
+    class: {
       "is-error": !_vm.isValidate
     }
   }, [_c("div", {
@@ -2633,7 +2352,7 @@ var __vue_render__$7 = function __vue_render__() {
       expression: "content"
     }],
     staticClass: "select",
-    "class": {
+    class: {
       placeholder: _vm.value == null || _vm.value == ""
     },
     attrs: {
@@ -2734,7 +2453,7 @@ var script$8 = {
     /** is error */
     isValidate: {
       type: Boolean,
-      "default": true
+      default: true
     }
   },
   data: function data() {
@@ -2787,7 +2506,7 @@ var __vue_render__$8 = function __vue_render__() {
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "item-textarea",
-    "class": {
+    class: {
       "is-error": !_vm.isValidate
     }
   }, [_c("textarea", {
@@ -2881,7 +2600,7 @@ var script$9 = {
     /** 是否未填写 */
     blank: {
       type: Boolean,
-      "default": false
+      default: false
     }
   },
   data: function data() {
@@ -2989,7 +2708,7 @@ var __vue_render__$9 = function __vue_render__() {
 
   return _c("div", {
     staticClass: "form-renderer-uploader",
-    "class": {
+    class: {
       blank: _vm.blank
     }
   }, [_c("WechatUploader", {
@@ -3089,13 +2808,13 @@ var script$a = {
     /** 是否自动上传 */
     autoUpload: {
       type: Boolean,
-      "default": true
+      default: true
     },
 
     /** 是否通过验证 */
     isValiate: {
       type: Boolean,
-      "default": true
+      default: true
     }
   },
   data: function data() {
@@ -3313,7 +3032,7 @@ var script$b = {
     value: {},
     size: {
       type: Number,
-      "default": 9
+      default: 9
     },
 
     /** 上传函数 */
