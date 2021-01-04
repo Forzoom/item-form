@@ -87,6 +87,7 @@ export default class ItemSelect extends Vue {
     
     .select {
         width: 100%;
+        font-size: 14px;
         line-height: 25px;
         background-color: transparent;
         box-sizing: border-box;
