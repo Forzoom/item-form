@@ -11,7 +11,7 @@
             @finish="onFinish">
         </Uploader>
         <div class="item-uploader__title">
-            <ItemTitle :title="title"></ItemTitle>
+            <ItemTitle :title="title" :titleHint="titleHint" :is-required="asterisk" />
             <div v-if="titleHint" class="title-hint">{{titleHint}}</div>
         </div>
     </div>
@@ -42,6 +42,8 @@ export default {
 
         /** 是否通过验证 */
         isValiate: { type: Boolean, default: true },
+        /** 显示星号 */
+        asterisk: { type: Boolean, default: false },
     },
 
     data: function data() {

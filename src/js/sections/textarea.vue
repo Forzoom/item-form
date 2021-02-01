@@ -1,7 +1,7 @@
 <template>
 
     <div class="item-textarea__wrap">
-        <ItemTitle :title="title" :titleHint="titleHint" />
+        <ItemTitle :title="title" :titleHint="titleHint" :is-required="asterisk" />
         <div class="item-textarea" :class="{'is-error': !isValidate}">
             <textarea class="textarea"
                 v-model="content"
@@ -42,6 +42,8 @@ export default {
 
         /** is error */
         isValidate: { type: Boolean, default: true },
+        /** 显示星号 */
+        asterisk: { type: Boolean, default: false },
     },
 
     data: function data() {

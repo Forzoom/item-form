@@ -278,7 +278,7 @@ var __vue_render__ = function __vue_render__() {
   return _c("div", {
     staticClass: "item-title"
   }, [_vm._v("\n    " + _vm._s(_vm.title) + "\n    "), _vm.isRequired ? _c("span", {
-    staticClass: "primary-color"
+    staticClass: "item-title__asterisk"
   }, [_vm._v("*")]) : _vm._e(), _vm._v(" "), _vm.titleHint ? _c("span", {
     staticClass: "tips"
   }, [_vm._v(_vm._s(_vm.titleHint))]) : _vm._e()]);
@@ -290,15 +290,15 @@ __vue_render__._withStripped = true;
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-b316893e_0", {
-    source: ".item-title {\n  padding: 16px 0px;\n  font-size: 14px;\n  line-height: 18px;\n  font-weight: bold;\n}\n.item-title .tips {\n  color: #999;\n  font-size: 12px;\n}\n",
+  inject("data-v-3e07c9fc_0", {
+    source: ".item-title {\n  padding: 16px 0px;\n  font-size: 14px;\n  line-height: 18px;\n  font-weight: bold;\n}\n.item-title__asterisk {\n  color: #FF1D1D;\n}\n.item-title .tips {\n  color: #999;\n  font-size: 12px;\n}\n",
     map: {
       "version": 3,
       "sources": ["title.vue"],
       "names": [],
-      "mappings": "AAAA;EACE,iBAAiB;EACjB,eAAe;EACf,iBAAiB;EACjB,iBAAiB;AACnB;AACA;EACE,WAAW;EACX,eAAe;AACjB",
+      "mappings": "AAAA;EACE,iBAAiB;EACjB,eAAe;EACf,iBAAiB;EACjB,iBAAiB;AACnB;AACA;EACE,cAAc;AAChB;AACA;EACE,WAAW;EACX,eAAe;AACjB",
       "file": "title.vue",
-      "sourcesContent": [".item-title {\n  padding: 16px 0px;\n  font-size: 14px;\n  line-height: 18px;\n  font-weight: bold;\n}\n.item-title .tips {\n  color: #999;\n  font-size: 12px;\n}\n"]
+      "sourcesContent": [".item-title {\n  padding: 16px 0px;\n  font-size: 14px;\n  line-height: 18px;\n  font-weight: bold;\n}\n.item-title__asterisk {\n  color: #FF1D1D;\n}\n.item-title .tips {\n  color: #999;\n  font-size: 12px;\n}\n"]
     },
     media: undefined
   });
@@ -347,6 +347,12 @@ var script$1 = {
     readonly: {
       type: Boolean,
       default: false
+    },
+
+    /** 显示星号 */
+    asterisk: {
+      type: Boolean,
+      default: false
     }
   },
   data: function data() {
@@ -377,7 +383,8 @@ var __vue_render__$1 = function __vue_render__() {
   }, [_c("ItemTitle", {
     attrs: {
       title: _vm.title,
-      titleHint: _vm.titleHint
+      titleHint: _vm.titleHint,
+      "is-required": _vm.asterisk
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "clearfix"
@@ -412,7 +419,7 @@ __vue_render__$1._withStripped = true;
 
 var __vue_inject_styles__$1 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-40f97b87_0", {
+  inject("data-v-4484beaa_0", {
     source: ".item-button-group .item-button-item {\n  text-align: center;\n  margin-right: 10px;\n  margin-bottom: 5px;\n}\n.item-button-group .item-button-item:last-of-type {\n  margin-right: 0;\n}\n",
     map: {
       "version": 3,
@@ -1575,6 +1582,12 @@ var script$3 = {
     isValidate: {
       type: Boolean,
       default: true
+    },
+
+    /** 显示星号 */
+    asterisk: {
+      type: Boolean,
+      default: false
     }
   },
   data: function data() {
@@ -1677,7 +1690,8 @@ var __vue_render__$3 = function __vue_render__() {
   }, [_c("ItemTitle", {
     attrs: {
       title: _vm.title,
-      titleHint: _vm.titleHint
+      titleHint: _vm.titleHint,
+      "is-required": _vm.asterisk
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "item-cascader",
@@ -1723,7 +1737,7 @@ __vue_render__$3._withStripped = true;
 
 var __vue_inject_styles__$3 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-40068d58_0", {
+  inject("data-v-4c59fe57_0", {
     source: ".item-cascader {\n  background-color: #f2f2f2;\n  border-radius: 5px;\n  padding: 10px 15px;\n  font-size: 14px;\n  line-height: 25px;\n}\n.item-cascader.is-error {\n  box-shadow: 0 0 1px 1px #fc4548;\n}\n.item-cascader.placeholder {\n  color: #c8c8c8;\n}\n",
     map: {
       "version": 3,
@@ -1800,6 +1814,12 @@ var script$4 = {
     },
     formatter: {
       type: Function
+    },
+
+    /** 显示星号 */
+    asterisk: {
+      type: Boolean,
+      default: false
     }
   },
   data: function data() {
@@ -1838,7 +1858,8 @@ var __vue_render__$4 = function __vue_render__() {
   return _c("div", [_c("ItemTitle", {
     attrs: {
       title: _vm.title,
-      titleHint: _vm.titleHint
+      titleHint: _vm.titleHint,
+      "is-required": _vm.asterisk
     }
   }), _vm._v(" "), _vm.type == "text" ? _c("input", {
     directives: [{
@@ -1911,7 +1932,7 @@ __vue_render__$4._withStripped = true;
 
 var __vue_inject_styles__$4 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-36ac4c36_0", {
+  inject("data-v-3ba113fe_0", {
     source: ".item-input {\n  width: 100%;\n  padding: 10px 15px;\n  font-size: 14px;\n  line-height: 25px;\n  background-color: #f2f2f2;\n  border-radius: 5px;\n  box-sizing: border-box;\n}\n.item-input::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n.item-input.is-error {\n  box-shadow: 0 0 1px 1px #fc4548;\n}\n",
     map: {
       "version": 3,
@@ -2135,6 +2156,12 @@ var script$6 = {
     /** 占位 */
     placeholder: {
       type: String
+    },
+
+    /** 显示星号 */
+    asterisk: {
+      type: Boolean,
+      default: false
     }
   },
   data: function data() {
@@ -2203,7 +2230,8 @@ var __vue_render__$6 = function __vue_render__() {
   }, [_c("ItemTitle", {
     attrs: {
       title: _vm.title,
-      titleHint: _vm.titleHint
+      titleHint: _vm.titleHint,
+      "is-required": _vm.asterisk
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "item-list__inner",
@@ -2239,7 +2267,7 @@ __vue_render__$6._withStripped = true;
 
 var __vue_inject_styles__$6 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-24338e96_0", {
+  inject("data-v-4fc29b3d_0", {
     source: ".item-list__inner {\n  padding: 10px 15px;\n  font-size: 14px;\n  line-height: 25px;\n  background-color: #f2f2f2;\n  border-radius: 5px;\n}\n.item-list .placeholder {\n  color: #c8c8c8;\n}\n",
     map: {
       "version": 3,
@@ -2326,6 +2354,12 @@ var script$7 = {
     isValidate: {
       type: Boolean,
       default: true
+    },
+
+    /** 显示星号 */
+    asterisk: {
+      type: Boolean,
+      default: false
     }
   },
   data: function data() {
@@ -2363,7 +2397,8 @@ var __vue_render__$7 = function __vue_render__() {
   }, [_c("ItemTitle", {
     attrs: {
       title: _vm.title,
-      titleHint: _vm.titleHint
+      titleHint: _vm.titleHint,
+      "is-required": _vm.asterisk
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "item-select",
@@ -2421,7 +2456,7 @@ __vue_render__$7._withStripped = true;
 
 var __vue_inject_styles__$7 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-6673535c_0", {
+  inject("data-v-dd88f8de_0", {
     source: ".item-select {\n  padding: 10px 15px;\n  font-size: 14px;\n  line-height: 25px;\n  background-color: #f2f2f2;\n  border: 1px solid transparent;\n  border-radius: 5px;\n  box-sizing: border-box;\n}\n.item-select.is-error {\n  box-shadow: 0 0 1px 1px #fc4548;\n}\n.item-select .select {\n  width: 100%;\n  font-size: 14px;\n  line-height: 25px;\n  background-color: transparent;\n  box-sizing: border-box;\n}\n.item-select .select.padding-left {\n  padding-left: 10px;\n}\n.item-select .select.padding-right {\n  padding-right: 10px;\n}\n.item-select .select.left {\n  text-align: left;\n}\n.item-select .select.right {\n  text-align: right;\n}\n.item-select .select.center {\n  text-align: center;\n}\n.item-select .select.placeholder {\n  color: #c8c8c8;\n}\n.item-select.blank {\n  border-color: #fc4548;\n}\n.item-select.blank .input::-webkit-input-placeholder {\n  color: #fc4548;\n}\n",
     map: {
       "version": 3,
@@ -2486,6 +2521,12 @@ var script$8 = {
     isValidate: {
       type: Boolean,
       default: true
+    },
+
+    /** 显示星号 */
+    asterisk: {
+      type: Boolean,
+      default: false
     }
   },
   data: function data() {
@@ -2534,7 +2575,8 @@ var __vue_render__$8 = function __vue_render__() {
   }, [_c("ItemTitle", {
     attrs: {
       title: _vm.title,
-      titleHint: _vm.titleHint
+      titleHint: _vm.titleHint,
+      "is-required": _vm.asterisk
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "item-textarea",
@@ -2577,7 +2619,7 @@ __vue_render__$8._withStripped = true;
 
 var __vue_inject_styles__$8 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-409cb033_0", {
+  inject("data-v-2e4a09dc_0", {
     source: ".item-textarea {\n  background-color: #f2f2f2;\n}\n.item-textarea.is-error {\n  box-shadow: 0 0 1px 1px #fc4548;\n}\n.item-textarea .textarea {\n  width: 100%;\n  padding: 10px 15px;\n  font-size: 14px;\n  line-height: 25px;\n  background-color: transparent;\n  border-radius: 5px;\n  box-sizing: border-box;\n  resize: none;\n}\n.item-textarea .textarea::-webkit-input-placeholder {\n  color: #c8c8c8;\n}\n.item-textarea .length {\n  padding: 0px 15px 10px;\n  font-size: 12px;\n  line-height: 17px;\n  color: #999;\n  text-align: right;\n}\n",
     map: {
       "version": 3,
@@ -2847,6 +2889,12 @@ var script$a = {
     isValiate: {
       type: Boolean,
       default: true
+    },
+
+    /** 显示星号 */
+    asterisk: {
+      type: Boolean,
+      default: false
     }
   },
   data: function data() {
@@ -2999,7 +3047,9 @@ var __vue_render__$a = function __vue_render__() {
     staticClass: "item-uploader__title"
   }, [_c("ItemTitle", {
     attrs: {
-      title: _vm.title
+      title: _vm.title,
+      titleHint: _vm.titleHint,
+      "is-required": _vm.asterisk
     }
   }), _vm._v(" "), _vm.titleHint ? _c("div", {
     staticClass: "title-hint"
@@ -3012,7 +3062,7 @@ __vue_render__$a._withStripped = true;
 
 var __vue_inject_styles__$a = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-7faf1972_0", {
+  inject("data-v-b6654e34_0", {
     source: ".item-uploader {\n  padding: 20px 0 0px;\n  text-align: center;\n}\n.item-uploader .ro-uploader-wrap {\n  width: 72px;\n  height: 72px;\n}\n.item-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image.loaderImg {\n  background-size: cover;\n  background-position: center;\n}\n.item-uploader__uploader {\n  margin-top: 15px;\n}\n.item-uploader__title {\n  padding-right: 10px;\n  font-size: 14px;\n  line-height: 20px;\n  color: #101010;\n  text-align: left;\n  overflow: hidden;\n}\n.item-uploader__title .item-title {\n  padding: 6px 0 0px;\n}\n.item-uploader__title .title-hint {\n  margin-top: 4px;\n  color: #999;\n}\n",
     map: {
       "version": 3,
@@ -3071,6 +3121,12 @@ var script$b = {
     httpRequest: {
       required: true,
       type: Function
+    },
+
+    /** 显示星号 */
+    asterisk: {
+      type: Boolean,
+      default: false
     }
   },
   data: function data() {
@@ -3263,7 +3319,8 @@ var __vue_render__$b = function __vue_render__() {
   }, [_c("ItemTitle", {
     attrs: {
       title: _vm.title,
-      titleHint: _vm.titleHint
+      titleHint: _vm.titleHint,
+      "is-required": _vm.asterisk
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "clearfix"
@@ -3288,7 +3345,7 @@ __vue_render__$b._withStripped = true;
 
 var __vue_inject_styles__$b = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-1ab798e8_0", {
+  inject("data-v-7bd12cbe_0", {
     source: ".item-multi-uploader .uploader-wrap {\n  padding: 8px 18px;\n}\n.item-multi-uploader .ro-uploader-wrap {\n  display: block;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap {\n  float: left;\n  position: relative;\n  margin-right: 0;\n  padding: 2px;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image {\n  vertical-align: middle;\n  width: 109px !important;\n  height: 109px !important;\n  background-position: center center;\n  border-radius: 2px;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove {\n  position: absolute;\n  width: 11px !important;\n  height: 11px !important;\n  font-size: 11px;\n  line-height: 11px;\n  color: rgba(255, 255, 255, 0.6);\n  background-color: rgba(255, 255, 255, 0.8);\n  right: 6px;\n  top: 6px;\n  border-radius: 50%;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:before,\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:after {\n  background-color: #ccc;\n  transform: translate(-50%, -50%) rotateZ(45deg);\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:before {\n  width: 1px;\n  height: 7px !important;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:after {\n  width: 7px !important;\n  height: 1px;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active {\n  border-color: #fff;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:before,\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:after {\n  background-color: #fff;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request {\n  position: relative;\n  width: 109px !important;\n  height: 109px !important;\n  border: 1px dashed #ccc;\n  margin: 2px 0px 0px 2px;\n  border-radius: 2px;\n  box-sizing: border-box;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request:before,\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request:after {\n  background-color: #ccc;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request:before {\n  width: 3px;\n  height: 36.33333333px;\n  border-radius: 3px;\n  background-color: #999;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request:after {\n  width: 36.33333333px;\n  height: 3px;\n  border-radius: 3px;\n  background-color: #999;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request:active {\n  border-color: #999;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request:active:before,\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request:active:after {\n  background-color: #999;\n}\n",
     map: {
       "version": 3,

@@ -1,7 +1,7 @@
 <template>
 
     <div class="item-select__wrap">
-        <ItemTitle :title="title" :titleHint="titleHint" />
+        <ItemTitle :title="title" :titleHint="titleHint" :is-required="asterisk" />
         <div class="item-select" :class="{'is-error': !isValidate}">
             <div class="single-line-left">
                 <slot name="left"></slot>
@@ -60,6 +60,8 @@ export default {
 
         /** 是否错误 */
         isValidate: { type: Boolean, default: true },
+        /** 显示星号 */
+        asterisk: { type: Boolean, default: false },
     },
 
     data: function data() {

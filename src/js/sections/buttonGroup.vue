@@ -1,7 +1,7 @@
 <template>
 
     <div class="item-button-group">
-        <ItemTitle :title="title" :titleHint="titleHint" />
+        <ItemTitle :title="title" :titleHint="titleHint" :is-required="asterisk" />
         <div class="clearfix">
             <div v-for="(option, index) in options"
                 :key="index"
@@ -41,6 +41,8 @@ export default {
 
         options: { required: true, type: Array },
         readonly: { type: Boolean, default: false },
+        /** 显示星号 */
+        asterisk: { type: Boolean, default: false },
     },
 
     data: function data() {

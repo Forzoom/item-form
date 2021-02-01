@@ -1,7 +1,7 @@
 <template>
 
     <div class="item-cascader__wrap">
-        <ItemTitle :title="title" :titleHint="titleHint" />
+        <ItemTitle :title="title" :titleHint="titleHint" :is-required="asterisk" />
 
         <div class="item-cascader" :class="{placeholder: name.length === 0, 'is-error': !isValidate}" @click="onClickPlaceholder">
             {{name || placeholder}}
@@ -38,6 +38,8 @@ export default {
         placeholder: { type: String, default: '请选择' },
         fetchList: { required: true, type: Function },
         isValidate: { type: Boolean, default: true },
+        /** 显示星号 */
+        asterisk: { type: Boolean, default: false },
     },
 
     data: function data() {

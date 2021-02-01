@@ -1,6 +1,6 @@
 <template>
     <div class="item-list">
-        <ItemTitle :title="title" :titleHint="titleHint" />
+        <ItemTitle :title="title" :titleHint="titleHint" :is-required="asterisk" />
         <div class="item-list__inner" :class="{placeholder: isPlaceholder}" @click="onClickSubject">
             {{textStr}}
         </div>
@@ -44,6 +44,8 @@ export default class ItemList extends Vue {
     @Prop({ type: String, default: '、' }) public separator!: string;
     /** 占位 */
     @Prop({ type: String }) public placeholder?: string;
+    /** 显示星号 */
+    @Prop({ type: Boolean, default: false }) public asterisk!: boolean;
 
     public visible = false;
 

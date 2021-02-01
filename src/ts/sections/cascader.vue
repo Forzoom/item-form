@@ -1,6 +1,6 @@
 <template>
     <div class="item-cascader__wrap">
-        <ItemTitle :title="title" :titleHint="titleHint" />
+        <ItemTitle :title="title" :titleHint="titleHint" :is-required="asterisk" />
 
         <div class="item-cascader" :class="{placeholder: name.length === 0, 'is-error': !isValidate}" @click="onClickPlaceholder">
             {{name || placeholder}}
@@ -36,6 +36,8 @@ export default class ItemCascader extends Vue {
     @Prop({ type: String, default: '请选择' }) public placeholder?: string;
     @Prop({ required: true, type: Function }) public fetchList!: <T extends CascaderItem>(item: T) => T[] | Promise<T[]>;
     @Prop({ type: Boolean, default: true }) public isValidate?: boolean;
+    /** 显示星号 */
+    @Prop({ type: Boolean, default: false }) public asterisk!: boolean;
 
     public visible = false;
     public ids: number[] = [];

@@ -1,6 +1,6 @@
 <template>
     <div class="item-multi-uploader">
-        <ItemTitle :title="title" :titleHint="titleHint" />
+        <ItemTitle :title="title" :titleHint="titleHint" :is-required="asterisk" />
         <div class="clearfix">
             <WechatUploader
                 ref="uploader"
@@ -37,6 +37,8 @@ export default class ItemMultiUploader extends Vue {
     @Prop({ type: Number, default: 9 }) public size!: number;
     /** 上传函数 */
     @Prop({ required: true, type: Function }) public httpRequest!: (imageInfo: ImageInfo) => ImageInfo | Promise<ImageInfo>;
+    /** 显示星号 */
+    @Prop({ type: Boolean, default: false }) public asterisk!: boolean;
 
     /**
      * 数据开始加载

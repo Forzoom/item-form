@@ -1,6 +1,6 @@
 <template>
     <div class="item-textarea__wrap">
-        <ItemTitle :title="title" :titleHint="titleHint" />
+        <ItemTitle :title="title" :titleHint="titleHint" :is-required="asterisk" />
         <div class="item-textarea" :class="{'is-error': !isValidate}">
             <textarea class="textarea"
                 v-model="content"
@@ -35,6 +35,8 @@ export default class ItemTextarea extends Vue {
     @Prop({ type: Number }) public max!: any;
     /** is error */
     @Prop({ type: Boolean, default: true }) public isValidate!: boolean;
+    /** 显示星号 */
+    @Prop({ type: Boolean, default: false }) public asterisk!: boolean;
 
     public content = '';
 

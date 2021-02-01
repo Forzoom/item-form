@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ItemTitle :title="title" :titleHint="titleHint" />
+        <ItemTitle :title="title" :titleHint="titleHint" :is-required="asterisk" />
         <input v-if="type == 'text'"
             class="item-input"
             :class="{ 'is-error': !isValidate }"
@@ -50,6 +50,8 @@ export default class ItemInput extends Vue {
     @Prop({ type: Boolean, default: true }) public isValidate!: boolean;
     @Prop({ type: Function }) public parser: any;
     @Prop({ type: Function }) public formatter: any;
+    /** 显示星号 */
+    @Prop({ type: Boolean, default: false }) public asterisk!: boolean;
 
     public content = '';
 

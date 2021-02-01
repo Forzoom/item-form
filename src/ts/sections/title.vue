@@ -1,7 +1,7 @@
 <template>
     <div class="item-title">
         {{title}}
-        <span v-if="isRequired" class="primary-color">*</span>
+        <span v-if="isRequired" class="item-title__asterisk">*</span>
         <span v-if="titleHint" class="tips">{{titleHint}}</span>
     </div>
 </template>
@@ -38,6 +38,9 @@ export default class ItemTitle extends Vue {
     font-size: 14px;
     line-height: 18px;
     font-weight: bold;
+    &__asterisk {
+        color: #FF1D1D;
+    }
     .tips {
         color: #999;
         font-size: 12px;

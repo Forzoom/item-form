@@ -11,6 +11,8 @@ export interface ItemInputMeta extends FormSection {
         max?: number;
         parser?: (str: string) => any;
         formatter?: (val: any) => string;
+        /** 显示星号 */
+        asterisk?: boolean;
     };
 }
 
@@ -21,6 +23,8 @@ export interface ItemSelectMeta extends FormSection {
         titleHint?: string;
         placeholder?: string;
         options?: ValueText[];
+        /** 显示星号 */
+        asterisk?: boolean;
     };
 }
 
@@ -32,6 +36,8 @@ export interface ItemCascaderMeta extends FormSection {
         placeholder?: string;
         /** 获取列表数据 */
         fetchList: <T extends CascaderItem>(item: T) => T[] | Promise<T[]>;
+        /** 显示星号 */
+        asterisk?: boolean;
     };
 }
 
@@ -52,6 +58,8 @@ export interface ItemListMeta extends FormSection {
         multiple?: boolean;
         /** 显示文本分割 */
         separator?: string;
+        /** 显示星号 */
+        asterisk?: boolean;
     };
 }
 
@@ -65,6 +73,8 @@ export interface ItemTextareaMeta extends FormSection {
         /** 占位 */
         placeholder?: string;
         max?: number;
+        /** 显示星号 */
+        asterisk?: boolean;
     };
 }
 
@@ -75,6 +85,8 @@ export interface ItemButtonGroupMeta extends FormSection {
         titleHint?: string;
         options?: ValueText[];
         readonly?: boolean;
+        /** 显示星号 */
+        asterisk?: boolean;
     };
 }
 
@@ -87,6 +99,8 @@ export interface ItemUploaderMeta extends FormSection {
         titleHint?: string;
         /** 用于发送上传请求 */
         httpRequest: (imageInfo: ImageInfo) => ImageInfo | Promise<ImageInfo>;
+        /** 显示星号 */
+        asterisk?: boolean;
     };
 }
 
@@ -99,6 +113,8 @@ export interface ItemMultiUploaderMeta extends FormSection {
         titleHint?: string;
         size?: number;
         httpRequest: (imageInfo: ImageInfo) => ImageInfo | Promise<ImageInfo>;
+        /** 显示星号 */
+        asterisk?: boolean;
     };
 }
 

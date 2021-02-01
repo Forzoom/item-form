@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <ItemTitle :title="title" :titleHint="titleHint" />
+        <ItemTitle :title="title" :titleHint="titleHint" :is-required="asterisk" />
         <input v-if="type == 'text'"
             class="item-input"
             :class="{ 'is-error': !isValidate }"
@@ -58,6 +58,8 @@ export default {
         isValidate: { type: Boolean, default: true },
         parser: { type: Function },
         formatter: { type: Function },
+        /** 显示星号 */
+        asterisk: { type: Boolean, default: false },
     },
 
     data: function data() {

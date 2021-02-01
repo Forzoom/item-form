@@ -1,7 +1,7 @@
 <template>
 
     <div class="item-multi-uploader">
-        <ItemTitle :title="title" :titleHint="titleHint" />
+        <ItemTitle :title="title" :titleHint="titleHint" :is-required="asterisk" />
         <div class="clearfix">
             <WechatUploader
                 ref="uploader"
@@ -40,6 +40,8 @@ export default {
 
         /** 上传函数 */
         httpRequest: { required: true, type: Function },
+        /** 显示星号 */
+        asterisk: { type: Boolean, default: false },
     },
 
     data: function data() {

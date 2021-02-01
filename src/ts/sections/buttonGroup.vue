@@ -1,6 +1,6 @@
 <template>
     <div class="item-button-group">
-        <ItemTitle :title="title" :titleHint="titleHint" />
+        <ItemTitle :title="title" :titleHint="titleHint" :is-required="asterisk" />
         <div class="clearfix">
             <div v-for="(option, index) in options"
                 :key="index"
@@ -38,6 +38,8 @@ export default class ItemButtonGroup extends Vue {
     @Prop({ type: String }) public titleHint?: string;
     @Prop({ required: true, type: Array }) public options!: ValueText[];
     @Prop({ type: Boolean, default: false }) public readonly!: boolean;
+    /** 显示星号 */
+    @Prop({ type: Boolean, default: false }) public asterisk!: boolean;
 
     public onClickOption(option: ValueText) {
         this.$emit('input', option.value);

@@ -1,6 +1,6 @@
 <template>
     <div class="item-select__wrap">
-        <ItemTitle :title="title" :titleHint="titleHint" />
+        <ItemTitle :title="title" :titleHint="titleHint" :is-required="asterisk" />
         <div class="item-select" :class="{'is-error': !isValidate}">
             <div class="single-line-left">
                 <slot name="left"></slot>
@@ -51,6 +51,8 @@ export default class ItemSelect extends Vue {
     @Prop({ type: Array, default() { return []; } }) public options!: ValueText[];
     /** 是否错误 */
     @Prop({ type: Boolean, default: true }) public isValidate?: boolean;
+    /** 显示星号 */
+    @Prop({ type: Boolean, default: false }) public asterisk!: boolean;
 
     /** 内容 */
     public content = '';

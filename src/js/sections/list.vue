@@ -1,7 +1,7 @@
 <template>
 
     <div class="item-list">
-        <ItemTitle :title="title" :titleHint="titleHint" />
+        <ItemTitle :title="title" :titleHint="titleHint" :is-required="asterisk" />
         <div class="item-list__inner" :class="{placeholder: isPlaceholder}" @click="onClickSubject">
             {{textStr}}
         </div>
@@ -51,6 +51,8 @@ export default {
 
         /** 占位 */
         placeholder: { type: String },
+        /** 显示星号 */
+        asterisk: { type: Boolean, default: false },
     },
 
     data: function data() {

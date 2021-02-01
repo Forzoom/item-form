@@ -10,7 +10,7 @@
             @finish="onFinish">
         </Uploader>
         <div class="item-uploader__title">
-            <ItemTitle :title="title"></ItemTitle>
+            <ItemTitle :title="title" :titleHint="titleHint" :is-required="asterisk" />
             <div v-if="titleHint" class="title-hint">{{titleHint}}</div>
         </div>
     </div>
@@ -40,6 +40,8 @@ export default class ItemUploader extends Vue {
     @Prop({ type: Boolean, default: true }) public autoUpload!: boolean;
     /** 是否通过验证 */
     @Prop({ type: Boolean, default: true }) public isValiate?: boolean;
+    /** 显示星号 */
+    @Prop({ type: Boolean, default: false }) public asterisk!: boolean;
 
     /** 可能存在判断出错的情况 */
     public hasUploaded = false;
