@@ -1,6 +1,6 @@
 <template>
 
-    <div class="form-renderer-uploader" :class="{'blank': blank}">
+    <div class="if-comp-uploader" :class="{'blank': blank}">
         <WechatUploader
             ref="uploader"
             :size="1"
@@ -26,6 +26,7 @@
 
 </template>
 <script lang="js">
+
 /**
  * 班级头像上传逻辑
  *
@@ -137,7 +138,7 @@ export default {
 
 @import "../../lib/style/mixins.less";
 
-.form-renderer-uploader {
+.if-comp-uploader {
     position: relative;
     width: 84px;
     height: 84px;

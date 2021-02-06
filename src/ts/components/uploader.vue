@@ -1,5 +1,5 @@
 <template>
-    <div class="form-renderer-uploader" :class="{'blank': blank}">
+    <div class="if-comp-uploader" :class="{'blank': blank}">
         <WechatUploader
             ref="uploader"
             :size="1"
@@ -121,7 +121,7 @@ export default class Uploader extends Vue {
 <style lang="less">
 @import "../../lib/style/mixins.less";
 
-.form-renderer-uploader {
+.if-comp-uploader {
     position: relative;
     width: 84px;
     height: 84px;

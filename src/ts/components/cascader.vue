@@ -1,18 +1,18 @@
 <template>
-    <div class="cascader">
+    <div class="if-comp-cascader">
         <div class="clearfix white-bg">
             <div v-for="(name, index) in crumbs"
                 :key="index"
-                class="cascader__crumb"
+                class="if-comp-cascader__crumb"
                 :class="{selected: level == index}"
                 @click="onClickCrumb(index)">
                 {{name}}
             </div>
         </div>
-        <div class="cascader__level">
+        <div class="if-comp-cascader__level">
             <div v-for="item in list"
                 :key="item.id"
-                class="cascader__item after-line"
+                class="if-comp-cascader__item after-line"
                 :class="{selected: item.id == value[level]}"
                 @click="onClickItem(item, level)">
                 {{item.name}}
@@ -174,7 +174,7 @@ export default class Cascader extends Vue {
 @padding-vertical: 7px;
 @padding-horizontal: 20px;
 
-.cascader {
+.if-comp-cascader {
     &__crumb {
         float: left;
         padding: @padding-vertical 10px;

@@ -1445,13 +1445,13 @@ var __vue_render__$2 = function __vue_render__() {
   var _c = _vm._self._c || _h;
 
   return _c("div", {
-    staticClass: "cascader"
+    staticClass: "if-comp-cascader"
   }, [_c("div", {
     staticClass: "clearfix white-bg"
   }, _vm._l(_vm.crumbs, function (name, index) {
     return _c("div", {
       key: index,
-      staticClass: "cascader__crumb",
+      staticClass: "if-comp-cascader__crumb",
       class: {
         selected: _vm.level == index
       },
@@ -1462,11 +1462,11 @@ var __vue_render__$2 = function __vue_render__() {
       }
     }, [_vm._v("\n            " + _vm._s(name) + "\n        ")]);
   }), 0), _vm._v(" "), _c("div", {
-    staticClass: "cascader__level"
+    staticClass: "if-comp-cascader__level"
   }, _vm._l(_vm.list, function (item) {
     return _c("div", {
       key: item.id,
-      staticClass: "cascader__item after-line",
+      staticClass: "if-comp-cascader__item after-line",
       class: {
         selected: item.id == _vm.value[_vm.level]
       },
@@ -1485,15 +1485,15 @@ __vue_render__$2._withStripped = true;
 
 var __vue_inject_styles__$2 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-779b403a_0", {
-    source: ".cascader__crumb {\n  float: left;\n  padding: 7px 10px;\n  font-size: 12px;\n  line-height: 22px;\n  background-color: #fff;\n  border-bottom: 1px solid #fff;\n}\n.cascader__crumb.selected {\n  border-bottom: 1px solid #fc4548;\n}\n.cascader__level {\n  height: 216px;\n  -webkit-overflow-scrolling: touch;\n  overflow-y: auto;\n}\n.cascader__item {\n  position: relative;\n  padding: 7px 20px;\n  font-size: 12px;\n  line-height: 22px;\n  background-color: #fff;\n}\n.cascader__item:after {\n  left: 15px;\n}\n.cascader__item.selected {\n  color: #fc4548;\n}\n.cascader__item:last-child:after {\n  display: none;\n}\n",
+  inject("data-v-0076a00e_0", {
+    source: ".if-comp-cascader__crumb {\n  float: left;\n  padding: 7px 10px;\n  font-size: 12px;\n  line-height: 22px;\n  background-color: #fff;\n  border-bottom: 1px solid #fff;\n}\n.if-comp-cascader__crumb.selected {\n  border-bottom: 1px solid #fc4548;\n}\n.if-comp-cascader__level {\n  height: 216px;\n  -webkit-overflow-scrolling: touch;\n  overflow-y: auto;\n}\n.if-comp-cascader__item {\n  position: relative;\n  padding: 7px 20px;\n  font-size: 12px;\n  line-height: 22px;\n  background-color: #fff;\n}\n.if-comp-cascader__item:after {\n  left: 15px;\n}\n.if-comp-cascader__item.selected {\n  color: #fc4548;\n}\n.if-comp-cascader__item:last-child:after {\n  display: none;\n}\n",
     map: {
       "version": 3,
       "sources": ["cascader.vue"],
       "names": [],
       "mappings": "AAAA;EACE,WAAW;EACX,iBAAiB;EACjB,eAAe;EACf,iBAAiB;EACjB,sBAAsB;EACtB,6BAA6B;AAC/B;AACA;EACE,gCAAgC;AAClC;AACA;EACE,aAAa;EACb,iCAAiC;EACjC,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,iBAAiB;EACjB,eAAe;EACf,iBAAiB;EACjB,sBAAsB;AACxB;AACA;EACE,UAAU;AACZ;AACA;EACE,cAAc;AAChB;AACA;EACE,aAAa;AACf",
       "file": "cascader.vue",
-      "sourcesContent": [".cascader__crumb {\n  float: left;\n  padding: 7px 10px;\n  font-size: 12px;\n  line-height: 22px;\n  background-color: #fff;\n  border-bottom: 1px solid #fff;\n}\n.cascader__crumb.selected {\n  border-bottom: 1px solid #fc4548;\n}\n.cascader__level {\n  height: 216px;\n  -webkit-overflow-scrolling: touch;\n  overflow-y: auto;\n}\n.cascader__item {\n  position: relative;\n  padding: 7px 20px;\n  font-size: 12px;\n  line-height: 22px;\n  background-color: #fff;\n}\n.cascader__item:after {\n  left: 15px;\n}\n.cascader__item.selected {\n  color: #fc4548;\n}\n.cascader__item:last-child:after {\n  display: none;\n}\n"]
+      "sourcesContent": [".if-comp-cascader__crumb {\n  float: left;\n  padding: 7px 10px;\n  font-size: 12px;\n  line-height: 22px;\n  background-color: #fff;\n  border-bottom: 1px solid #fff;\n}\n.if-comp-cascader__crumb.selected {\n  border-bottom: 1px solid #fc4548;\n}\n.if-comp-cascader__level {\n  height: 216px;\n  -webkit-overflow-scrolling: touch;\n  overflow-y: auto;\n}\n.if-comp-cascader__item {\n  position: relative;\n  padding: 7px 20px;\n  font-size: 12px;\n  line-height: 22px;\n  background-color: #fff;\n}\n.if-comp-cascader__item:after {\n  left: 15px;\n}\n.if-comp-cascader__item.selected {\n  color: #fc4548;\n}\n.if-comp-cascader__item:last-child:after {\n  display: none;\n}\n"]
     },
     media: undefined
   });
@@ -2005,7 +2005,7 @@ var __vue_render__$5 = function __vue_render__() {
   var _c = _vm._self._c || _h;
 
   return _c("van-popup", {
-    staticClass: "list-popup",
+    staticClass: "if-comp-list",
     attrs: {
       value: _vm.value,
       position: "bottom"
@@ -2013,11 +2013,11 @@ var __vue_render__$5 = function __vue_render__() {
   }, [_vm.title ? _c("div", {
     staticClass: "title"
   }, [_vm._v(_vm._s(_vm.title))]) : _vm._e(), _vm._v(" "), _c("div", {
-    staticClass: "list-popup__list"
+    staticClass: "if-comp-list__list"
   }, _vm._l(_vm.list, function (item, index) {
     return _c("div", {
       key: index,
-      staticClass: "list-popup__list-item clearfix",
+      staticClass: "if-comp-list__list-item clearfix",
       class: {
         "color-red": _vm.multipleValue[item.value] || item.value === _vm.value
       },
@@ -2049,15 +2049,15 @@ __vue_render__$5._withStripped = true;
 
 var __vue_inject_styles__$5 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-65516a06_0", {
-    source: ".list-popup {\n  height: 100%;\n  color: #333;\n  overflow: scroll;\n}\n.list-popup .color-red {\n  color: #fc4548;\n}\n.list-popup .title {\n  position: relative;\n  padding: 10px 0;\n  font-size: 16px;\n  line-height: 24px;\n  font-weight: normal;\n  color: #333;\n  text-align: center;\n  border-bottom: 0;\n}\n.list-popup__list {\n  background-color: #fff;\n  height: 100%;\n  overflow-y: auto;\n  -webkit-overflow-scrolling: touch;\n}\n.list-popup__list .left {\n  float: left;\n  white-space: normal;\n}\n.list-popup__list .right {\n  float: right;\n}\n.list-popup__list-item {\n  padding: 10px 15px;\n  font-size: 16px;\n  line-height: 24px;\n  border-bottom: solid 1px #efefef;\n  white-space: normal;\n  box-sizing: border-box;\n}\n.list-popup__list-item:last-child {\n  margin-bottom: 45px;\n  border-bottom: solid 1px #efefef;\n}\n.list-popup .bottom-fixed {\n  position: fixed;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}\n",
+  inject("data-v-1911c17d_0", {
+    source: ".if-comp-list {\n  height: 100%;\n  color: #333;\n  overflow: scroll;\n}\n.if-comp-list .color-red {\n  color: #fc4548;\n}\n.if-comp-list .title {\n  position: relative;\n  padding: 10px 0;\n  font-size: 16px;\n  line-height: 24px;\n  font-weight: normal;\n  color: #333;\n  text-align: center;\n  border-bottom: 0;\n}\n.if-comp-list__list {\n  background-color: #fff;\n  height: 100%;\n  overflow-y: auto;\n  -webkit-overflow-scrolling: touch;\n}\n.if-comp-list__list .left {\n  float: left;\n  white-space: normal;\n}\n.if-comp-list__list .right {\n  float: right;\n}\n.if-comp-list__list-item {\n  padding: 10px 15px;\n  font-size: 16px;\n  line-height: 24px;\n  border-bottom: solid 1px #efefef;\n  white-space: normal;\n  box-sizing: border-box;\n}\n.if-comp-list__list-item:last-child {\n  margin-bottom: 45px;\n  border-bottom: solid 1px #efefef;\n}\n.if-comp-list .bottom-fixed {\n  position: fixed;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}\n",
     map: {
       "version": 3,
       "sources": ["list.vue"],
       "names": [],
       "mappings": "AAAA;EACE,YAAY;EACZ,WAAW;EACX,gBAAgB;AAClB;AACA;EACE,cAAc;AAChB;AACA;EACE,kBAAkB;EAClB,eAAe;EACf,eAAe;EACf,iBAAiB;EACjB,mBAAmB;EACnB,WAAW;EACX,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,sBAAsB;EACtB,YAAY;EACZ,gBAAgB;EAChB,iCAAiC;AACnC;AACA;EACE,WAAW;EACX,mBAAmB;AACrB;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,eAAe;EACf,iBAAiB;EACjB,gCAAgC;EAChC,mBAAmB;EACnB,sBAAsB;AACxB;AACA;EACE,mBAAmB;EACnB,gCAAgC;AAClC;AACA;EACE,eAAe;EACf,OAAO;EACP,QAAQ;EACR,SAAS;AACX",
       "file": "list.vue",
-      "sourcesContent": [".list-popup {\n  height: 100%;\n  color: #333;\n  overflow: scroll;\n}\n.list-popup .color-red {\n  color: #fc4548;\n}\n.list-popup .title {\n  position: relative;\n  padding: 10px 0;\n  font-size: 16px;\n  line-height: 24px;\n  font-weight: normal;\n  color: #333;\n  text-align: center;\n  border-bottom: 0;\n}\n.list-popup__list {\n  background-color: #fff;\n  height: 100%;\n  overflow-y: auto;\n  -webkit-overflow-scrolling: touch;\n}\n.list-popup__list .left {\n  float: left;\n  white-space: normal;\n}\n.list-popup__list .right {\n  float: right;\n}\n.list-popup__list-item {\n  padding: 10px 15px;\n  font-size: 16px;\n  line-height: 24px;\n  border-bottom: solid 1px #efefef;\n  white-space: normal;\n  box-sizing: border-box;\n}\n.list-popup__list-item:last-child {\n  margin-bottom: 45px;\n  border-bottom: solid 1px #efefef;\n}\n.list-popup .bottom-fixed {\n  position: fixed;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}\n"]
+      "sourcesContent": [".if-comp-list {\n  height: 100%;\n  color: #333;\n  overflow: scroll;\n}\n.if-comp-list .color-red {\n  color: #fc4548;\n}\n.if-comp-list .title {\n  position: relative;\n  padding: 10px 0;\n  font-size: 16px;\n  line-height: 24px;\n  font-weight: normal;\n  color: #333;\n  text-align: center;\n  border-bottom: 0;\n}\n.if-comp-list__list {\n  background-color: #fff;\n  height: 100%;\n  overflow-y: auto;\n  -webkit-overflow-scrolling: touch;\n}\n.if-comp-list__list .left {\n  float: left;\n  white-space: normal;\n}\n.if-comp-list__list .right {\n  float: right;\n}\n.if-comp-list__list-item {\n  padding: 10px 15px;\n  font-size: 16px;\n  line-height: 24px;\n  border-bottom: solid 1px #efefef;\n  white-space: normal;\n  box-sizing: border-box;\n}\n.if-comp-list__list-item:last-child {\n  margin-bottom: 45px;\n  border-bottom: solid 1px #efefef;\n}\n.if-comp-list .bottom-fixed {\n  position: fixed;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}\n"]
     },
     media: undefined
   });
@@ -2749,7 +2749,7 @@ var __vue_render__$9 = function __vue_render__() {
   var _c = _vm._self._c || _h;
 
   return _c("div", {
-    staticClass: "form-renderer-uploader",
+    staticClass: "if-comp-uploader",
     class: {
       blank: _vm.blank
     }
@@ -2794,15 +2794,15 @@ __vue_render__$9._withStripped = true;
 
 var __vue_inject_styles__$9 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-a297a45c_0", {
-    source: ".form-renderer-uploader {\n  position: relative;\n  width: 84px;\n  height: 84px;\n  border-radius: 3px;\n  border: 1px solid #eaeaea;\n  background-color: #fafafa;\n  margin: 0 auto;\n  overflow: hidden;\n}\n.form-renderer-uploader.blank {\n  border: 1px solid #fc4548;\n}\n.form-renderer-uploader.blank .uploader-mock-background {\n  color: #fc4548;\n}\n.form-renderer-uploader .icon {\n  font-size: 23px;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-request.loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n  margin-right: 0;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap {\n  position: relative;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image.loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .remove-wrapper {\n  position: absolute;\n  width: 84px !important;\n  height: 23px !important;\n  left: 0;\n  top: 61px;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove {\n  position: absolute;\n  width: 84px !important;\n  height: 23px !important;\n  line-height: 23px !important;\n  font-size: 14px !important;\n  left: 0;\n  top: 0 !important;\n  color: #666;\n  background-color: rgba(0, 0, 0, 0.5) !important;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:before {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 100% !important;\n  height: 0 !important;\n  content: '更换图片';\n  color: #fff;\n  font-size: 14px;\n  text-align: center;\n  transform: translate(-50%, -50%) rotate(0deg);\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:after {\n  width: 0 !important;\n  height: 0 !important;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active {\n  border-color: #fff;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:before,\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:after {\n  background-color: #fff;\n}\n.form-renderer-uploader .loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n}\n.form-renderer-uploader .upLoaderImg {\n  width: 84px;\n  height: 84px;\n  position: absolute;\n}\n.form-renderer-uploader .uploader-mock-background {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  color: #000;\n  text-align: center;\n  transform: translate(-50%, -50%);\n}\n",
+  inject("data-v-fe37d574_0", {
+    source: ".if-comp-uploader {\n  position: relative;\n  width: 84px;\n  height: 84px;\n  border-radius: 3px;\n  border: 1px solid #eaeaea;\n  background-color: #fafafa;\n  margin: 0 auto;\n  overflow: hidden;\n}\n.if-comp-uploader.blank {\n  border: 1px solid #fc4548;\n}\n.if-comp-uploader.blank .uploader-mock-background {\n  color: #fc4548;\n}\n.if-comp-uploader .icon {\n  font-size: 23px;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-request.loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n  margin-right: 0;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap {\n  position: relative;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image.loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .remove-wrapper {\n  position: absolute;\n  width: 84px !important;\n  height: 23px !important;\n  left: 0;\n  top: 61px;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove {\n  position: absolute;\n  width: 84px !important;\n  height: 23px !important;\n  line-height: 23px !important;\n  font-size: 14px !important;\n  left: 0;\n  top: 0 !important;\n  color: #666;\n  background-color: rgba(0, 0, 0, 0.5) !important;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:before {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 100% !important;\n  height: 0 !important;\n  content: '更换图片';\n  color: #fff;\n  font-size: 14px;\n  text-align: center;\n  transform: translate(-50%, -50%) rotate(0deg);\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:after {\n  width: 0 !important;\n  height: 0 !important;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active {\n  border-color: #fff;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:before,\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:after {\n  background-color: #fff;\n}\n.if-comp-uploader .loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n}\n.if-comp-uploader .upLoaderImg {\n  width: 84px;\n  height: 84px;\n  position: absolute;\n}\n.if-comp-uploader .uploader-mock-background {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  color: #000;\n  text-align: center;\n  transform: translate(-50%, -50%);\n}\n",
     map: {
       "version": 3,
       "sources": ["uploader.vue"],
       "names": [],
       "mappings": "AAAA;EACE,kBAAkB;EAClB,WAAW;EACX,YAAY;EACZ,kBAAkB;EAClB,yBAAyB;EACzB,yBAAyB;EACzB,cAAc;EACd,gBAAgB;AAClB;AACA;EACE,yBAAyB;AAC3B;AACA;EACE,cAAc;AAChB;AACA;EACE,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,uBAAuB;EACvB,eAAe;AACjB;AACA;EACE,kBAAkB;AACpB;AACA;EACE,sBAAsB;EACtB,uBAAuB;AACzB;AACA;EACE,kBAAkB;EAClB,sBAAsB;EACtB,uBAAuB;EACvB,OAAO;EACP,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,sBAAsB;EACtB,uBAAuB;EACvB,4BAA4B;EAC5B,0BAA0B;EAC1B,OAAO;EACP,iBAAiB;EACjB,WAAW;EACX,+CAA+C;AACjD;AACA;EACE,kBAAkB;EAClB,MAAM;EACN,QAAQ;EACR,sBAAsB;EACtB,oBAAoB;EACpB,eAAe;EACf,WAAW;EACX,eAAe;EACf,kBAAkB;EAClB,6CAA6C;AAC/C;AACA;EACE,mBAAmB;EACnB,oBAAoB;AACtB;AACA;EACE,kBAAkB;AACpB;AACA;;EAEE,sBAAsB;AACxB;AACA;EACE,sBAAsB;EACtB,uBAAuB;AACzB;AACA;EACE,WAAW;EACX,YAAY;EACZ,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,SAAS;EACT,WAAW;EACX,kBAAkB;EAClB,gCAAgC;AAClC",
       "file": "uploader.vue",
-      "sourcesContent": [".form-renderer-uploader {\n  position: relative;\n  width: 84px;\n  height: 84px;\n  border-radius: 3px;\n  border: 1px solid #eaeaea;\n  background-color: #fafafa;\n  margin: 0 auto;\n  overflow: hidden;\n}\n.form-renderer-uploader.blank {\n  border: 1px solid #fc4548;\n}\n.form-renderer-uploader.blank .uploader-mock-background {\n  color: #fc4548;\n}\n.form-renderer-uploader .icon {\n  font-size: 23px;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-request.loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n  margin-right: 0;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap {\n  position: relative;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image.loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .remove-wrapper {\n  position: absolute;\n  width: 84px !important;\n  height: 23px !important;\n  left: 0;\n  top: 61px;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove {\n  position: absolute;\n  width: 84px !important;\n  height: 23px !important;\n  line-height: 23px !important;\n  font-size: 14px !important;\n  left: 0;\n  top: 0 !important;\n  color: #666;\n  background-color: rgba(0, 0, 0, 0.5) !important;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:before {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 100% !important;\n  height: 0 !important;\n  content: '更换图片';\n  color: #fff;\n  font-size: 14px;\n  text-align: center;\n  transform: translate(-50%, -50%) rotate(0deg);\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:after {\n  width: 0 !important;\n  height: 0 !important;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active {\n  border-color: #fff;\n}\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:before,\n.form-renderer-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:after {\n  background-color: #fff;\n}\n.form-renderer-uploader .loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n}\n.form-renderer-uploader .upLoaderImg {\n  width: 84px;\n  height: 84px;\n  position: absolute;\n}\n.form-renderer-uploader .uploader-mock-background {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  color: #000;\n  text-align: center;\n  transform: translate(-50%, -50%);\n}\n"]
+      "sourcesContent": [".if-comp-uploader {\n  position: relative;\n  width: 84px;\n  height: 84px;\n  border-radius: 3px;\n  border: 1px solid #eaeaea;\n  background-color: #fafafa;\n  margin: 0 auto;\n  overflow: hidden;\n}\n.if-comp-uploader.blank {\n  border: 1px solid #fc4548;\n}\n.if-comp-uploader.blank .uploader-mock-background {\n  color: #fc4548;\n}\n.if-comp-uploader .icon {\n  font-size: 23px;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-request.loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n  margin-right: 0;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap {\n  position: relative;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image.loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .remove-wrapper {\n  position: absolute;\n  width: 84px !important;\n  height: 23px !important;\n  left: 0;\n  top: 61px;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove {\n  position: absolute;\n  width: 84px !important;\n  height: 23px !important;\n  line-height: 23px !important;\n  font-size: 14px !important;\n  left: 0;\n  top: 0 !important;\n  color: #666;\n  background-color: rgba(0, 0, 0, 0.5) !important;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:before {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 100% !important;\n  height: 0 !important;\n  content: '更换图片';\n  color: #fff;\n  font-size: 14px;\n  text-align: center;\n  transform: translate(-50%, -50%) rotate(0deg);\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:after {\n  width: 0 !important;\n  height: 0 !important;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active {\n  border-color: #fff;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:before,\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:after {\n  background-color: #fff;\n}\n.if-comp-uploader .loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n}\n.if-comp-uploader .upLoaderImg {\n  width: 84px;\n  height: 84px;\n  position: absolute;\n}\n.if-comp-uploader .uploader-mock-background {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  color: #000;\n  text-align: center;\n  transform: translate(-50%, -50%);\n}\n"]
     },
     media: undefined
   });

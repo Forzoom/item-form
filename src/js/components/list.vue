@@ -1,12 +1,12 @@
 <template>
 
-    <van-popup :value="value" class="list-popup" position="bottom">
+    <van-popup :value="value" class="if-comp-list" position="bottom">
         <div v-if="title" class="title">{{title}}</div>
-        <div class="list-popup__list">
+        <div class="if-comp-list__list">
             <div v-for="(item, index) in list"
                 :key="index"
                 @click="onClickItem(item)"
-                class="list-popup__list-item clearfix"
+                class="if-comp-list__list-item clearfix"
                 :class="{'color-red': multipleValue[item.value] || item.value === value}">
                 <div class="left">{{item.text}}</div>
             </div>
@@ -80,7 +80,7 @@ export default {
 
 @import '../../lib/style/mixins.less';
 
-.list-popup {
+.if-comp-list {
     height: 100%;
     color: @color-font-1;
     overflow: scroll;
