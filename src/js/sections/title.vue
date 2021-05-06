@@ -1,6 +1,6 @@
 <template>
 
-    <div class="item-title">
+    <div v-if="title" class="item-title">
         {{title}}
         <span v-if="isRequired" class="item-title__asterisk">*</span>
         <span v-if="titleHint" class="tips">{{titleHint}}</span>

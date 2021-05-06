@@ -3,6 +3,11 @@ import { PropsDefinition } from 'vue/types/options';
 import { ComponentOptions } from 'vue';
 import { ValueText, ImageInfo, CascaderItem } from './form';
 
+type DefaultData<V> =  object | ((this: V) => object);
+type DefaultProps = Record<string, any>;
+type DefaultMethods<V> =  { [key: string]: (this: V, ...args: any[]) => any };
+type DefaultComputed = { [key: string]: any };
+
 // buttonGroup
 interface ItemButtonGroupProp {
     title?: string;
@@ -13,19 +18,20 @@ interface ItemButtonGroupProp {
     asterisk?: boolean;
 }
 export type ItemButtonGroupComponent = CombinedVueInstance<Vue, object, object, object, ItemButtonGroupProp>;
-export type ItemButtonGroupComponentOptions = ComponentOptions<Vue, object, object, object, PropsDefinition<ItemButtonGroupProp>, ItemButtonGroupProp>;
+export type ItemButtonGroupComponentOptions = ComponentOptions<Vue, object, DefaultMethods<Vue>, DefaultComputed, PropsDefinition<ItemButtonGroupProp>, ItemButtonGroupProp>;
 
 export const ItemButtonGroup: ItemButtonGroupComponentOptions;
 
 // cascader
 interface ItemCascaderProp {
     placeholder?: string;
-    fetchList: <T extends CascaderItem>(item: T) => T[] | Promise<T[]>;
+    fetchList: Function;
+    // fetchList: <T extends CascaderItem>(item: T) => T[] | Promise<T[]>;
     /** 显示星号 */
     asterisk?: boolean;
 }
 export type ItemCascaderComponent = CombinedVueInstance<Vue, object, object, object, ItemCascaderProp>;
-export type ItemCascaderComponentOptions = ComponentOptions<Vue, object, object, object, PropsDefinition<ItemCascaderProp>, ItemCascaderProp>;
+export type ItemCascaderComponentOptions = ComponentOptions<Vue, object, DefaultMethods<Vue>, DefaultComputed, PropsDefinition<ItemCascaderProp>, ItemCascaderProp>;
 
 export const ItemCascader: ItemCascaderComponentOptions;
 
@@ -40,7 +46,7 @@ interface ItemInputProp {
     asterisk?: boolean;
 }
 export type ItemInputComponent = CombinedVueInstance<Vue, object, object, object, ItemInputProp>;
-export type ItemInputComponentOptions = ComponentOptions<Vue, object, object, object, PropsDefinition<ItemInputProp>, ItemInputProp>;
+export type ItemInputComponentOptions = ComponentOptions<Vue, object, DefaultMethods<Vue>, DefaultComputed, PropsDefinition<ItemInputProp>, ItemInputProp>;
 
 export const ItemInput: ItemInputComponentOptions;
 
@@ -54,7 +60,7 @@ interface ItemListProp {
     asterisk?: boolean;
 }
 export type ItemListComponent = CombinedVueInstance<Vue, object, object, object, ItemListProp>;
-export type ItemListComponentOptions = ComponentOptions<Vue, object, object, object, PropsDefinition<ItemListProp>, ItemListProp>;
+export type ItemListComponentOptions = ComponentOptions<Vue, object, DefaultMethods<Vue>, DefaultComputed, PropsDefinition<ItemListProp>, ItemListProp>;
 
 export const ItemList: ItemListComponentOptions;
 
@@ -68,7 +74,7 @@ interface ItemMultiUploaderProp {
     asterisk?: boolean;
 }
 export type ItemMultiUploaderComponent = CombinedVueInstance<Vue, object, object, object, ItemMultiUploaderProp>;
-export type ItemMultiUploaderComponentOptions = ComponentOptions<Vue, object, object, object, PropsDefinition<ItemMultiUploaderProp>, ItemMultiUploaderProp>;
+export type ItemMultiUploaderComponentOptions = ComponentOptions<Vue, object, DefaultMethods<Vue>, DefaultComputed, PropsDefinition<ItemMultiUploaderProp>, ItemMultiUploaderProp>;
 
 export const ItemMultiUploader: ItemMultiUploaderComponentOptions;
 
@@ -80,7 +86,7 @@ interface ItemSelectProp {
     asterisk?: boolean;
 }
 export type ItemSelectComponent = CombinedVueInstance<Vue, object, object, object, ItemSelectProp>;
-export type ItemSelectComponentOptions = ComponentOptions<Vue, object, object, object, PropsDefinition<ItemSelectProp>, ItemSelectProp>;
+export type ItemSelectComponentOptions = ComponentOptions<Vue, object, DefaultMethods<Vue>, DefaultComputed, PropsDefinition<ItemSelectProp>, ItemSelectProp>;
 
 export const ItemSelect: ItemSelectComponentOptions;
 
@@ -92,7 +98,7 @@ interface ItemTextareaProp {
     asterisk?: boolean;
 }
 export type ItemTextareaComponent = CombinedVueInstance<Vue, object, object, object, ItemTextareaProp>;
-export type ItemTextareaComponentOptions = ComponentOptions<Vue, object, object, object, PropsDefinition<ItemTextareaProp>, ItemTextareaProp>;
+export type ItemTextareaComponentOptions = ComponentOptions<Vue, object, DefaultMethods<Vue>, DefaultComputed, PropsDefinition<ItemTextareaProp>, ItemTextareaProp>;
 
 export const ItemTextarea: ItemTextareaComponentOptions;
 
@@ -104,7 +110,7 @@ interface ItemTitleProp {
     asterisk?: boolean;
 }
 export type ItemTitleComponent = CombinedVueInstance<Vue, object, object, object, ItemTitleProp>;
-export type ItemTitleComponentOptions = ComponentOptions<Vue, object, object, object, PropsDefinition<ItemTitleProp>, ItemTitleProp>;
+export type ItemTitleComponentOptions = ComponentOptions<Vue, object, DefaultMethods<Vue>, DefaultComputed, PropsDefinition<ItemTitleProp>, ItemTitleProp>;
 
 export const ItemTitle: ItemTitleComponentOptions;
 
@@ -117,6 +123,6 @@ interface ItemUploaderProp {
     asterisk?: boolean;
 }
 export type ItemUploaderComponent = CombinedVueInstance<Vue, object, object, object, ItemUploaderProp>;
-export type ItemUploaderComponentOptions = ComponentOptions<Vue, object, object, object, PropsDefinition<ItemUploaderProp>, ItemUploaderProp>;
+export type ItemUploaderComponentOptions = ComponentOptions<Vue, object, DefaultMethods<Vue>, DefaultComputed, PropsDefinition<ItemUploaderProp>, ItemUploaderProp>;
 
 export const ItemUploader: ItemUploaderComponentOptions;
