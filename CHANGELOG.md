@@ -1,3 +1,7 @@
+#### 0.2.2
+
+1. fix: uploader组件原本显示的是选择的图片内容，现在将显示httpRequest返回的结果
+
 #### 0.2.1
 
 1. 当没有title时，将不显示`<ItemTitle>`

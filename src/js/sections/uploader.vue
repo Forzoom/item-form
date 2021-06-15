@@ -42,13 +42,14 @@ export default {
 
         /** 是否通过验证 */
         isValiate: { type: Boolean, default: true },
+
         /** 显示星号 */
         asterisk: { type: Boolean, default: false },
     },
 
     data: function data() {
         return {
-            /** 可能存在判断出错的情况 */
+            /** 是否已经上传过图片，当已经上传的情况下，将不会再触发上传。可能存在判断出错的情况 */
             hasUploaded: false,
         };
     },
@@ -105,6 +106,8 @@ export default {
             }
 
             const result = await this.httpRequest(image);
+            // @ts-ignore
+            this.$refs.uploader.setImage(result.url);
             this.$emit('input', result);
             this.hasUploaded = true;
         },

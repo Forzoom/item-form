@@ -2867,7 +2867,7 @@ var script$a = {
   },
   data: function data() {
     return {
-      /** 可能存在判断出错的情况 */
+      /** 是否已经上传过图片，当已经上传的情况下，将不会再触发上传。可能存在判断出错的情况 */
       hasUploaded: false
     };
   },
@@ -2931,11 +2931,13 @@ var script$a = {
                 return this.httpRequest(image);
 
               case 5:
-                result = _context.sent;
+                result = _context.sent; // @ts-ignore
+
+                this.$refs.uploader.setImage(result.url);
                 this.$emit('input', result);
                 this.hasUploaded = true;
 
-              case 8:
+              case 9:
               case "end":
                 return _context.stop();
             }
@@ -3030,7 +3032,7 @@ __vue_render__$a._withStripped = true;
 
 var __vue_inject_styles__$a = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-b6654e34_0", {
+  inject("data-v-35f40721_0", {
     source: ".item-uploader {\n  padding: 20px 0 0px;\n  text-align: center;\n}\n.item-uploader .ro-uploader-wrap {\n  width: 72px;\n  height: 72px;\n}\n.item-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image.loaderImg {\n  background-size: cover;\n  background-position: center;\n}\n.item-uploader__uploader {\n  margin-top: 15px;\n}\n.item-uploader__title {\n  padding-right: 10px;\n  font-size: 14px;\n  line-height: 20px;\n  color: #101010;\n  text-align: left;\n  overflow: hidden;\n}\n.item-uploader__title .item-title {\n  padding: 6px 0 0px;\n}\n.item-uploader__title .title-hint {\n  margin-top: 4px;\n  color: #999;\n}\n",
     map: {
       "version": 3,

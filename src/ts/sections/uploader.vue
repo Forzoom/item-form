@@ -43,7 +43,7 @@ export default class ItemUploader extends Vue {
     /** 显示星号 */
     @Prop({ type: Boolean, default: false }) public asterisk!: boolean;
 
-    /** 可能存在判断出错的情况 */
+    /** 是否已经上传过图片，当已经上传的情况下，将不会再触发上传。可能存在判断出错的情况 */
     public hasUploaded = false;
 
     /**
@@ -88,6 +88,8 @@ export default class ItemUploader extends Vue {
         }
 
         const result = await this.httpRequest(image);
+        // @ts-ignore
+        this.$refs.uploader.setImage(result.url);
         this.$emit('input', result);
         this.hasUploaded = true;
     }
