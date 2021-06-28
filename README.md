@@ -56,6 +56,19 @@ export default class Page extends Vue {
         ];
         return sections;
     }
+
+    /**
+     * 点击提交
+     */
+    public async onClickSubmit() {
+        // 当使用了ItemUploader、ItemMultiUploader组件时，在提交代码之前应该调用FormRenderer的beforeSubmit函数，以确保Uploader完成上传逻辑
+        const renderer = this.$refs.form as FormRendererComponent;
+        await renderer.beforeSubmit();
+    }
 }
 
 ```
+
+### Todo
+
+1. uploader支持普通网页上传
