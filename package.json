@@ -1,6 +1,6 @@
 {
   "name": "@forzoom/item-form",
-  "version": "0.2.2",
+  "version": "0.3.0-rc0",
   "main": "dist/item-form.cjs.js",
   "module": "dist/item-form.esm.js",
   "license": "MIT",
@@ -20,7 +20,7 @@
     "@babel/plugin-proposal-decorators": "^7.10.5",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-typescript": "^7.10.4",
-    "@forzoom/uploader": "^0.2.1",
+    "@forzoom/uploader": "0.3.0-rc1",
     "@rollup/plugin-babel": "^5.2.0",
     "rollup": "^2.26.9",
     "rollup-plugin-alias": "^2.2.0",

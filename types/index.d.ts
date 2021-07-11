@@ -126,3 +126,16 @@ export type ItemUploaderComponent = CombinedVueInstance<Vue, object, object, obj
 export type ItemUploaderComponentOptions = ComponentOptions<Vue, object, DefaultMethods<Vue>, DefaultComputed, PropsDefinition<ItemUploaderProp>, ItemUploaderProp>;
 
 export const ItemUploader: ItemUploaderComponentOptions;
+
+// commonUploader
+interface ItemCommonUploaderProp {
+    title?: string;
+    titleHint?: string;
+    httpRequest: (imageInfo: any) => ImageInfo | Promise<ImageInfo>;
+    /** 显示星号 */
+    asterisk?: boolean;
+}
+export type ItemCommonUploaderComponent = CombinedVueInstance<Vue, object, object, object, ItemCommonUploaderProp>;
+export type ItemCommonUploaderComponentOptions = ComponentOptions<Vue, object, DefaultMethods<Vue>, DefaultComputed, PropsDefinition<ItemCommonUploaderProp>, ItemCommonUploaderProp>;
+
+export const ItemCommonUploader: ItemMultiUploaderComponentOptions;

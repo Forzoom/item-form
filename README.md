@@ -72,3 +72,4 @@ export default class Page extends Vue {
 ### Todo
 
 1. uploader支持普通网页上传
+1. 修改为使用自带Uploader

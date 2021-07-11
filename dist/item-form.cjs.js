@@ -1,5 +1,7 @@
 'use strict';
 
+function _typeof2(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
+
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
@@ -55,6 +57,20 @@ require('core-js/modules/es.array.filter');
 require('core-js/modules/es.object.keys');
 
 require('core-js/modules/es.array.concat');
+
+var Vue = require('vue');
+
+require('core-js/modules/es.array.splice');
+
+require('core-js/modules/web.url');
+
+function _interopDefaultLegacy(e) {
+  return e && _typeof2(e) === 'object' && 'default' in e ? e : {
+    'default': e
+  };
+}
+
+var Vue__default = /*#__PURE__*/_interopDefaultLegacy(Vue);
 
 !function (e) {
   var t,
@@ -2650,6 +2666,542 @@ var __vue_component__$8 = /*#__PURE__*/normalizeComponent({
   render: __vue_render__$8,
   staticRenderFns: __vue_staticRenderFns__$8
 }, __vue_inject_styles__$8, __vue_script__$8, __vue_scope_id__$8, __vue_is_functional_template__$8, __vue_module_identifier__$8, false, createInjector, undefined, undefined);
+
+var header = '<div class="ro-uploader-wrap" :class="containerClass" :style="containerStyle">';
+var footer = '<div v-for="(image, index) in images" ' + ':key="index"' + 'class="ro-uploader-image-wrap"' + ':class="imageWrapClass"' + ':style="imageWrapStyle">' + '<div v-if="!lazyload" ' + 'class="ro-uploader-image"' + ':class="imageClass"' + ':style="[{\'background-image\': \'url(\' + transformImage(image) + \')\'}, imageStyle]"' + '@click="onClickImage(index)">' + '</div>' + '<div v-else ' + 'class="ro-uploader-image"' + ':class="imageClass"' + 'v-lazy:background-image="image"' + ':style="[imageStyle]"' + '@click="onClickImage(index)">' + '</div>' + '<div v-if="canModify" class="remove-wrapper" :class="removeClass" :style="removeStyle" @click="onClickRemove(index)"><div class="ro-uploader-remove"></div></div>' + '</div>' + '<slot name="request">' + '<div class="ro-uploader-image-wrap ro-uploader-request" ' + 'v-if="images.length < size && canModify"' + '@click="onClickRequest"' + ':class="requestClass"' + ':style="requestStyle">' + '</div>' + '</slot>' + '</div>';
+/**
+ * @load 当图片上传开始时
+ * @finish 当图片上传结束时
+ */
+
+function factory(_Vue) {
+  return _Vue.extend({
+    name: 'Uploader',
+    props: {
+      /**
+       * 允许上传图片个数
+       */
+      size: {
+        type: Number,
+        "default": 1
+      },
+
+      /**
+       * 是否允许修改
+       */
+      canModify: {
+        type: Boolean,
+        "default": true
+      },
+
+      /**
+       * 容器对象类
+       */
+      containerClass: {
+        type: [Object, Array],
+        "default": function _default() {
+          return {};
+        }
+      },
+
+      /**
+       * 容器对象样式
+       */
+      containerStyle: {
+        type: Object,
+        "default": function _default() {
+          return {};
+        }
+      },
+
+      /**
+       * 图片对象类
+       */
+      imageClass: {
+        type: [Object, Array],
+        "default": function _default() {
+          return {};
+        }
+      },
+
+      /**
+       * 图片对象样式
+       */
+      imageStyle: {
+        type: Object,
+        "default": function _default() {
+          return {};
+        }
+      },
+
+      /**
+       * wrap
+       */
+      imageWrapClass: {
+        type: [Object, Array],
+        "default": function _default() {
+          return {};
+        }
+      },
+
+      /**
+       * wrap
+       */
+      imageWrapStyle: {
+        type: Object,
+        "default": function _default() {
+          return {};
+        }
+      },
+
+      /**
+       * 请求对象类
+       */
+      requestClass: {
+        type: [Object, Array],
+        "default": function _default() {
+          return {};
+        }
+      },
+
+      /**
+       * 请求对象样式
+       */
+      requestStyle: {
+        type: Object,
+        "default": function _default() {
+          return {};
+        }
+      },
+
+      /**
+       * 删除按钮样式类
+       */
+      removeClass: {
+        type: [Object, Array],
+        "default": function _default() {
+          return {};
+        }
+      },
+
+      /**
+       * 删除按钮样式
+       */
+      removeStyle: {
+        type: Object,
+        "default": function _default() {
+          return {};
+        }
+      },
+
+      /**
+       * 调用lazyload，因为无法确定存在vue-lazyload库，所以默认false
+       */
+      lazyload: {
+        type: Boolean,
+        "default": false
+      }
+    },
+    data: function data() {
+      return {
+        // 包含所有图片的数组
+        images: []
+      };
+    },
+    methods: {
+      /**
+       * 重置所有的images列表，不会触发任何的remove和add事件
+       */
+      setImages: function setImages(images) {
+        var tmp = [];
+
+        for (var i = 0, len = images.length; i < len; i++) {
+          tmp.push(images[i]);
+        }
+
+        this.images = tmp;
+      },
+
+      /**
+       * 添加图片
+       *  将触发@add(image)事件
+       *
+       * @param {string} image
+       *
+       * @return {boolean} 成功返回true，否则返回false
+       */
+      add: function add(image) {
+        if (this.images.length < this.size) {
+          this.images.push(image);
+          this.$emit('add', image);
+          return true;
+        }
+
+        return false;
+      },
+
+      /**
+       * 删除图片
+       *  将触发@remove(index)事件
+       *
+       * @param {number} index
+       *
+       * @return {boolean} true表示删除成功，false表示失败
+       */
+      remove: function remove(index) {
+        if (0 <= index && index < this.size) {
+          this.images.splice(index, 1);
+          this.$emit('remove', index);
+          return true;
+        }
+
+        return false;
+      },
+
+      /**
+       * 删除所有的图片
+       */
+      removeAll: function removeAll() {
+        for (var i = 0, len = this.images.length; i < len; i++) {
+          this.remove(i);
+        }
+
+        return true;
+      },
+
+      /**
+       * 获得所有图片
+       *
+       * @return {Array<string>}
+       */
+      getImages: function getImages() {
+        return this.images.slice(0);
+      },
+
+      /**
+       * 当点击图片时触发
+       *
+       * @param {number} index
+       */
+      onClickImage: function onClickImage(index) {
+        this.$emit('click', index);
+      },
+
+      /**
+       * 当点击删除按钮时触发
+       */
+      onClickRemove: function onClickRemove(index) {
+        this.remove(index);
+      },
+
+      /**
+       * 当点击添加按钮时
+       */
+      onClickRequest: function onClickRequest() {
+        this.$emit('request');
+      },
+
+      /**
+       * 获得允许上传的容量
+       */
+      getSize: function getSize() {
+        return this.size;
+      },
+
+      /**
+       * 获得当前已经上传的图片的数量
+       */
+      getCount: function getCount() {
+        return this.images.length;
+      },
+
+      /**
+       * 获取image，在模板中使用
+       */
+      transformImage: function transformImage(image) {
+        return image;
+      }
+    },
+    template: header + footer
+  });
+}
+
+var isIOS = /iPhone/.test(navigator.userAgent);
+
+function previewImage(image, images) {
+  wx.previewImage({
+    current: image,
+    urls: images
+  });
+}
+/**
+ * @return {Promise} res
+ *  - localIds: string[]
+ */
+
+
+function chooseImage(count) {
+  return new Promise(function (resolve, reject) {
+    wx.chooseImage({
+      count: count,
+      sizeType: ['compressed'],
+      success: function success(res) {
+        return resolve(res);
+      },
+      // @ts-ignore
+      cancel: function cancel() {
+        return reject(new Error('cancel'));
+      },
+      // @ts-ignore
+      fail: function fail() {
+        return reject(new Error('fail'));
+      }
+    });
+  });
+}
+/**
+ * 默认不显示progress
+ * @param localId
+ *
+ * @return {Promise} res
+ *  - serverId
+ */
+
+
+function uploadImage(localId) {
+  return new Promise(function (resolve, reject) {
+    wx.uploadImage({
+      localId: localId,
+      isShowProgressTips: 0,
+      success: function success(res) {
+        resolve(res);
+      },
+      fail: function fail(error) {
+        reject(error);
+      }
+    });
+  });
+}
+/**
+ * 在iOS中可能转base64
+ * @param localId
+ *
+ * @return {Promise<string>} imageData
+ */
+
+
+function getLocalImgData(localId) {
+  if (!isIOS || !window.__wxjs_is_wkwebview) {
+    return Promise.resolve(localId);
+  }
+
+  return new Promise(function (resolve, reject) {
+    wx.getLocalImgData({
+      localId: localId,
+      success: function success(res) {
+        return resolve(res.localData);
+      }
+    });
+  });
+}
+/**
+ * 上传图片到微信
+ *
+ * @return {Promise<WechatImage>}
+ */
+
+
+function uploadWechatImage(localId, transformLocalImageData) {
+  return uploadImage(localId).then(function (res) {
+    return new Promise(function (resolve) {
+      getLocalImgData(localId).then(function (image) {
+        resolve({
+          url: image,
+          localId: localId,
+          image: image,
+          serverId: res.serverId
+        });
+      });
+    });
+  })["catch"](function (error) {
+    throw new Error(error.errMsg);
+  });
+}
+/**
+ * 
+ */
+
+
+function factory$1(_Vue, options) {
+  var Uploader = factory(_Vue);
+  return Uploader.extend({
+    name: 'WechatUploader',
+    props: {
+      /**
+       * 是否使用微信的预览内容
+       */
+      useWechatPreview: {
+        type: Boolean,
+        "default": true
+      }
+    },
+    methods: {
+      /**
+       * 要求添加新的图片
+       */
+      onClickRequest: function onClickRequest() {
+        this.request();
+      },
+
+      /**
+       * 请求图片上传
+       */
+      request: function request() {
+        var vm = this;
+        vm.$emit('startRequest');
+        return chooseImage(Math.min(9, vm.size - vm.images.length)).then(function (res) {
+          vm.$emit('endRequest');
+          var localIds = res.localIds;
+
+          if (localIds.length === 0) {
+            return;
+          }
+
+          vm.$emit('choose', res);
+          vm.$emit('load');
+          vm.$emit('startRequest');
+          return vm.uploadWechatImages(localIds).then(function () {
+            vm.$emit('finish');
+            vm.$emit('endRequest');
+          })["catch"](function (errMsg) {
+            vm.$emit('error', errMsg);
+          });
+        })["catch"](function (error) {
+          // cancel 或 fail 情况
+          vm.$emit('endRequest');
+        });
+      },
+
+      /**
+       * 上传多张图片，需要保证一张上传完成之后，再上传另外一张
+       */
+      uploadWechatImages: function uploadWechatImages(localIds) {
+        var vm = this;
+        var localId = localIds.shift();
+        return uploadWechatImage(localId, options.transformWXLocalImageData).then(function (image) {
+          vm.add(image); // 没有内容，不再上传
+
+          if (localIds.length == 0) {
+            return;
+          }
+
+          return vm.uploadWechatImages(localIds);
+        })["catch"](function (errMsg) {
+          throw new Error(errMsg);
+        });
+      },
+      transformImage: function transformImage(image) {
+        return image.url;
+      }
+    },
+    mounted: function mounted() {
+      this.$on('click', function (index) {
+        var images = this.images;
+        previewImage(images[index].url, images.map(function (image) {
+          return image.url;
+        }));
+      });
+    }
+  });
+}
+/**
+ * 
+ */
+
+
+function factory$2(_Vue, options) {
+  var Uploader = factory(_Vue);
+  return Uploader.extend({
+    name: 'InputUploader',
+    props: {
+      accept: {
+        type: String
+      }
+    },
+    methods: {
+      /**
+       * 要求添加新的图片
+       */
+      onClickRequest: function onClickRequest() {
+        this.request();
+      },
+
+      /**
+       * 请求图片上传
+       */
+      request: function request() {
+        var $input = this.$refs.fileInput;
+
+        if ($input) {
+          $input.click();
+        }
+      },
+
+      /**
+       * 删除图片
+       *  将触发@remove(index)事件
+       *
+       * @param {number} index
+       *
+       * @return {boolean} true表示删除成功，false表示失败
+       */
+      remove: function remove(index) {
+        if (0 <= index && index < this.size) {
+          var removed = this.images.splice(index, 1);
+
+          for (var i = 0, len = removed.length; i < len; i++) {
+            URL.revokeObjectURL(removed[i].objectUrl);
+          }
+
+          this.$emit('remove', index);
+          return true;
+        }
+
+        return false;
+      },
+      onChangeInput: function onChangeInput() {
+        var $input = this.$refs.fileInput;
+
+        if ($input) {
+          for (var i = 0, len = $input.files.length; i < len; i++) {
+            // 如果此次循环已满，则不再循环
+            if (this.images.length >= this.size) {
+              return;
+            }
+
+            this.add({
+              url: URL.createObjectURL($input.files[i]),
+              file: $input.files[i],
+              objectUrl: URL.createObjectURL($input.files[i])
+            });
+          }
+        }
+      },
+
+      /**
+       * 获取用于展示的image
+       */
+      transformImage: function transformImage(image) {
+        return image.objectUrl || image.url;
+      }
+    },
+    template: header + '<input ref="fileInput" class="ro-uploader-input" type="file" @change="onChangeInput" :multiple="(size - images.length) > 1" :accept="accept" />' + footer
+  });
+}
+
+var WechatUploader = factory$1(Vue__default['default'], {
+  transformWXLocalImageData: true
+});
 /**
  * 班级头像上传逻辑
  *
@@ -2657,9 +3209,11 @@ var __vue_component__$8 = /*#__PURE__*/normalizeComponent({
  * - @remove 数据删除
  */
 
-
 var script$9 = {
   name: 'Uploader',
+  components: {
+    WechatUploader: WechatUploader
+  },
   props: {
     /** 提示内容 */
     hint: {
@@ -2707,6 +3261,7 @@ var script$9 = {
     setImage: function setImage(image) {
       var $uploader = this.$refs.uploader;
       $uploader.setImages([{
+        url: image,
         image: image,
         serverId: null
       }]);
@@ -2826,7 +3381,7 @@ __vue_render__$9._withStripped = true;
 
 var __vue_inject_styles__$9 = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-fe37d574_0", {
+  inject("data-v-6bc96ab0_0", {
     source: ".if-comp-uploader {\n  position: relative;\n  width: 84px;\n  height: 84px;\n  border-radius: 3px;\n  border: 1px solid #eaeaea;\n  background-color: #fafafa;\n  margin: 0 auto;\n  overflow: hidden;\n}\n.if-comp-uploader.blank {\n  border: 1px solid #fc4548;\n}\n.if-comp-uploader.blank .uploader-mock-background {\n  color: #fc4548;\n}\n.if-comp-uploader .icon {\n  font-size: 23px;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-request.loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n  margin-right: 0;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap {\n  position: relative;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image.loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .remove-wrapper {\n  position: absolute;\n  width: 84px !important;\n  height: 23px !important;\n  left: 0;\n  top: 61px;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove {\n  position: absolute;\n  width: 84px !important;\n  height: 23px !important;\n  line-height: 23px !important;\n  font-size: 14px !important;\n  left: 0;\n  top: 0 !important;\n  color: #666;\n  background-color: rgba(0, 0, 0, 0.5) !important;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:before {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 100% !important;\n  height: 0 !important;\n  content: '更换图片';\n  color: #fff;\n  font-size: 14px;\n  text-align: center;\n  transform: translate(-50%, -50%) rotate(0deg);\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:after {\n  width: 0 !important;\n  height: 0 !important;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active {\n  border-color: #fff;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:before,\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:after {\n  background-color: #fff;\n}\n.if-comp-uploader .loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n}\n.if-comp-uploader .upLoaderImg {\n  width: 84px;\n  height: 84px;\n  position: absolute;\n}\n.if-comp-uploader .uploader-mock-background {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  color: #000;\n  text-align: center;\n  transform: translate(-50%, -50%);\n}\n",
     map: {
       "version": 3,
@@ -3096,10 +3651,14 @@ var __vue_component__$a = /*#__PURE__*/normalizeComponent({
   staticRenderFns: __vue_staticRenderFns__$a
 }, __vue_inject_styles__$a, __vue_script__$a, __vue_scope_id__$a, __vue_is_functional_template__$a, __vue_module_identifier__$a, false, createInjector, undefined, undefined);
 
+var WechatUploader$1 = factory$1(Vue__default['default'], {
+  transformWXLocalImageData: true
+});
 var script$b = {
   name: 'ItemMultiUploader',
   components: {
-    ItemTitle: __vue_component__
+    ItemTitle: __vue_component__,
+    WechatUploader: WechatUploader$1
   },
   props: {
     /** title */
@@ -3162,7 +3721,7 @@ var script$b = {
       this.$emit('input', images.map(function (image) {
         var info = {
           key: image.serverId,
-          url: image.image,
+          url: image.url,
           // @ts-ignore
           mode: image.mode || 'wechat'
         };
@@ -3186,8 +3745,8 @@ var script$b = {
       var images = $uploader.getImages();
       this.$emit('input', images.map(function (image) {
         var info = {
-          key: image.serverId,
-          url: image.image,
+          key: image.key,
+          url: image.url,
           // @ts-ignore
           mode: image.mode || 'wechat'
         };
@@ -3298,7 +3857,9 @@ var script$b = {
         return {
           image: item.url,
           serverId: item.key,
-          mode: item.mode || 'file'
+          mode: item.mode || 'file',
+          key: item.key,
+          url: item.url
         };
       }));
     }
@@ -3347,7 +3908,7 @@ __vue_render__$b._withStripped = true;
 
 var __vue_inject_styles__$b = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-7bd12cbe_0", {
+  inject("data-v-70a8527c_0", {
     source: ".item-multi-uploader .uploader-wrap {\n  padding: 8px 18px;\n}\n.item-multi-uploader .ro-uploader-wrap {\n  display: block;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap {\n  float: left;\n  position: relative;\n  margin-right: 0;\n  padding: 2px;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image {\n  vertical-align: middle;\n  width: 109px !important;\n  height: 109px !important;\n  background-position: center center;\n  border-radius: 2px;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove {\n  position: absolute;\n  width: 11px !important;\n  height: 11px !important;\n  font-size: 11px;\n  line-height: 11px;\n  color: rgba(255, 255, 255, 0.6);\n  background-color: rgba(255, 255, 255, 0.8);\n  right: 6px;\n  top: 6px;\n  border-radius: 50%;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:before,\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:after {\n  background-color: #ccc;\n  transform: translate(-50%, -50%) rotateZ(45deg);\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:before {\n  width: 1px;\n  height: 7px !important;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:after {\n  width: 7px !important;\n  height: 1px;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active {\n  border-color: #fff;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:before,\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:after {\n  background-color: #fff;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request {\n  position: relative;\n  width: 109px !important;\n  height: 109px !important;\n  border: 1px dashed #ccc;\n  margin: 2px 0px 0px 2px;\n  border-radius: 2px;\n  box-sizing: border-box;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request:before,\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request:after {\n  background-color: #ccc;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request:before {\n  width: 3px;\n  height: 36.33333333px;\n  border-radius: 3px;\n  background-color: #999;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request:after {\n  width: 36.33333333px;\n  height: 3px;\n  border-radius: 3px;\n  background-color: #999;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request:active {\n  border-color: #999;\n}\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request:active:before,\n.item-multi-uploader .ro-uploader-wrap .ro-uploader-request:active:after {\n  background-color: #999;\n}\n",
     map: {
       "version": 3,
@@ -3379,8 +3940,499 @@ var __vue_component__$b = /*#__PURE__*/normalizeComponent({
   staticRenderFns: __vue_staticRenderFns__$b
 }, __vue_inject_styles__$b, __vue_script__$b, __vue_scope_id__$b, __vue_is_functional_template__$b, __vue_module_identifier__$b, false, createInjector, undefined, undefined);
 
+var WechatUploader$2 = factory$1(Vue__default['default'], {
+  transformWXLocalImageData: true
+});
+var InputUploader = factory$2(Vue__default['default']);
+/**
+ * 班级头像上传逻辑
+ *
+ * - @add 数据添加
+ * - @remove 数据删除
+ */
+
+var script$c = {
+  name: 'CommonUploader',
+  components: {
+    WechatUploader: WechatUploader$2,
+    InputUploader: InputUploader
+  },
+  props: {
+    /** 提示内容 */
+    hint: {
+      type: String
+    },
+
+    /** 背景样式类 */
+    backgroundStyle: {
+      type: [Object, Array]
+    },
+
+    /** 是否未填写 */
+    blank: {
+      type: Boolean,
+      default: false
+    },
+
+    /** 类型 */
+    type: {
+      type: String,
+      default: 'wechat'
+    },
+
+    /** 接受的文件类型，默认为 image/* ，只支持InputUploader中生效 */
+    accept: {
+      type: String,
+      default: 'image/*'
+    }
+  },
+  data: function data() {
+    return {
+      // 图片内容
+      image: null
+    };
+  },
+  computed: {
+    opacity: function opacity() {
+      return this.image ? 1 : 0;
+    }
+  },
+  watch: {},
+  methods: {
+    /**
+     * 获得元素
+     *
+     * @return {} uploader
+     */
+    getImage: function getImage() {
+      return this.image;
+    },
+
+    /**
+     * 设置头像
+     *
+     * @param {} image 头像内容
+     */
+    setImage: function setImage(image) {
+      var $uploader = this.$refs.uploader;
+      $uploader.setImages([{
+        url: image,
+        image: image
+      }]);
+      this.image = image;
+    },
+
+    /**
+     * 删除当前的图片信息
+     */
+    removeImage: function removeImage() {
+      var $uploader = this.$refs.uploader;
+      $uploader.setImages([]);
+    },
+
+    /**
+     * 数据开始加载
+     */
+    onLoad: function onLoad() {
+      this.$emit('load');
+    },
+
+    /**
+     * 图片加载完成
+     */
+    onFinish: function onFinish() {
+      this.$emit('finish');
+    },
+
+    /**
+     * add事件
+     *
+     *  {image, serverId}
+     */
+    onAdd: function onAdd() {
+      var $uploader = this.$refs.uploader;
+      var images = $uploader.getImages();
+      this.image = images[0].url;
+
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      this.$emit.apply(this, ['add'].concat(args));
+    },
+
+    /**
+     * remove事件
+     *
+     *  {} 可能没有数据
+     */
+    onRemove: function onRemove() {
+      this.image = null;
+
+      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
+      }
+
+      this.$emit.apply(this, ['remove'].concat(args));
+    }
+  }
+};
+/* script */
+
+var __vue_script__$c = script$c;
+/* template */
+
+var __vue_render__$c = function __vue_render__() {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c("div", {
+    staticClass: "if-comp-uploader",
+    class: {
+      blank: _vm.blank
+    }
+  }, [_vm.type === "wechat" ? _c("WechatUploader", {
+    ref: "uploader",
+    attrs: {
+      size: 1,
+      "can-modify": true,
+      "container-class": ["loaderImg"],
+      "container-style": {
+        opacity: _vm.opacity,
+        "z-index": 1,
+        position: "relative"
+      },
+      "request-class": ["loaderImg"],
+      "image-class": ["loaderImg"]
+    },
+    on: {
+      add: _vm.onAdd,
+      remove: _vm.onRemove,
+      load: _vm.onLoad,
+      finish: _vm.onFinish
+    }
+  }) : _vm.type === "input" ? _c("InputUploader", {
+    ref: "uploader",
+    attrs: {
+      size: 1,
+      "can-modify": true,
+      accept: _vm.accept,
+      "container-class": ["loaderImg"],
+      "container-style": {
+        opacity: _vm.opacity,
+        "z-index": 1,
+        position: "relative"
+      },
+      "request-class": ["loaderImg"],
+      "image-class": ["loaderImg"]
+    },
+    on: {
+      add: _vm.onAdd,
+      remove: _vm.onRemove,
+      load: _vm.onLoad,
+      finish: _vm.onFinish
+    }
+  }) : _vm._e(), _vm._v(" "), _c("div", {
+    staticClass: "uploader-mock-background",
+    style: _vm.backgroundStyle
+  }, [_c("p", [_c("svg", {
+    staticClass: "icon",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }, [_c("use", {
+    attrs: {
+      "xlink:href": "#iconxiangji1"
+    }
+  })])]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.hint))])])], 1);
+};
+
+var __vue_staticRenderFns__$c = [];
+__vue_render__$c._withStripped = true;
+/* style */
+
+var __vue_inject_styles__$c = function __vue_inject_styles__(inject) {
+  if (!inject) return;
+  inject("data-v-c51fdef6_0", {
+    source: ".if-comp-uploader {\n  position: relative;\n  width: 84px;\n  height: 84px;\n  border-radius: 3px;\n  border: 1px solid #eaeaea;\n  background-color: #fafafa;\n  margin: 0 auto;\n  overflow: hidden;\n}\n.if-comp-uploader.blank {\n  border: 1px solid #fc4548;\n}\n.if-comp-uploader.blank .uploader-mock-background {\n  color: #fc4548;\n}\n.if-comp-uploader .icon {\n  font-size: 23px;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-request.loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n  margin-right: 0;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap {\n  position: relative;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image.loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .remove-wrapper {\n  position: absolute;\n  width: 84px !important;\n  height: 23px !important;\n  left: 0;\n  top: 61px;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove {\n  position: absolute;\n  width: 84px !important;\n  height: 23px !important;\n  line-height: 23px !important;\n  font-size: 14px !important;\n  left: 0;\n  top: 0 !important;\n  color: #666;\n  background-color: rgba(0, 0, 0, 0.5) !important;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:before {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 100% !important;\n  height: 0 !important;\n  content: '更换图片';\n  color: #fff;\n  font-size: 14px;\n  text-align: center;\n  transform: translate(-50%, -50%) rotate(0deg);\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:after {\n  width: 0 !important;\n  height: 0 !important;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active {\n  border-color: #fff;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:before,\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:after {\n  background-color: #fff;\n}\n.if-comp-uploader .loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n}\n.if-comp-uploader .upLoaderImg {\n  width: 84px;\n  height: 84px;\n  position: absolute;\n}\n.if-comp-uploader .uploader-mock-background {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  color: #000;\n  text-align: center;\n  transform: translate(-50%, -50%);\n}\n",
+    map: {
+      "version": 3,
+      "sources": ["commonUploader.vue"],
+      "names": [],
+      "mappings": "AAAA;EACE,kBAAkB;EAClB,WAAW;EACX,YAAY;EACZ,kBAAkB;EAClB,yBAAyB;EACzB,yBAAyB;EACzB,cAAc;EACd,gBAAgB;AAClB;AACA;EACE,yBAAyB;AAC3B;AACA;EACE,cAAc;AAChB;AACA;EACE,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,uBAAuB;EACvB,eAAe;AACjB;AACA;EACE,kBAAkB;AACpB;AACA;EACE,sBAAsB;EACtB,uBAAuB;AACzB;AACA;EACE,kBAAkB;EAClB,sBAAsB;EACtB,uBAAuB;EACvB,OAAO;EACP,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,sBAAsB;EACtB,uBAAuB;EACvB,4BAA4B;EAC5B,0BAA0B;EAC1B,OAAO;EACP,iBAAiB;EACjB,WAAW;EACX,+CAA+C;AACjD;AACA;EACE,kBAAkB;EAClB,MAAM;EACN,QAAQ;EACR,sBAAsB;EACtB,oBAAoB;EACpB,eAAe;EACf,WAAW;EACX,eAAe;EACf,kBAAkB;EAClB,6CAA6C;AAC/C;AACA;EACE,mBAAmB;EACnB,oBAAoB;AACtB;AACA;EACE,kBAAkB;AACpB;AACA;;EAEE,sBAAsB;AACxB;AACA;EACE,sBAAsB;EACtB,uBAAuB;AACzB;AACA;EACE,WAAW;EACX,YAAY;EACZ,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,SAAS;EACT,WAAW;EACX,kBAAkB;EAClB,gCAAgC;AAClC",
+      "file": "commonUploader.vue",
+      "sourcesContent": [".if-comp-uploader {\n  position: relative;\n  width: 84px;\n  height: 84px;\n  border-radius: 3px;\n  border: 1px solid #eaeaea;\n  background-color: #fafafa;\n  margin: 0 auto;\n  overflow: hidden;\n}\n.if-comp-uploader.blank {\n  border: 1px solid #fc4548;\n}\n.if-comp-uploader.blank .uploader-mock-background {\n  color: #fc4548;\n}\n.if-comp-uploader .icon {\n  font-size: 23px;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-request.loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n  margin-right: 0;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap {\n  position: relative;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image.loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .remove-wrapper {\n  position: absolute;\n  width: 84px !important;\n  height: 23px !important;\n  left: 0;\n  top: 61px;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove {\n  position: absolute;\n  width: 84px !important;\n  height: 23px !important;\n  line-height: 23px !important;\n  font-size: 14px !important;\n  left: 0;\n  top: 0 !important;\n  color: #666;\n  background-color: rgba(0, 0, 0, 0.5) !important;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:before {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 100% !important;\n  height: 0 !important;\n  content: '更换图片';\n  color: #fff;\n  font-size: 14px;\n  text-align: center;\n  transform: translate(-50%, -50%) rotate(0deg);\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:after {\n  width: 0 !important;\n  height: 0 !important;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active {\n  border-color: #fff;\n}\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:before,\n.if-comp-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-remove:active:after {\n  background-color: #fff;\n}\n.if-comp-uploader .loaderImg {\n  width: 84px !important;\n  height: 84px !important;\n}\n.if-comp-uploader .upLoaderImg {\n  width: 84px;\n  height: 84px;\n  position: absolute;\n}\n.if-comp-uploader .uploader-mock-background {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  color: #000;\n  text-align: center;\n  transform: translate(-50%, -50%);\n}\n"]
+    },
+    media: undefined
+  });
+};
+/* scoped */
+
+
+var __vue_scope_id__$c = undefined;
+/* module identifier */
+
+var __vue_module_identifier__$c = undefined;
+/* functional template */
+
+var __vue_is_functional_template__$c = false;
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+var __vue_component__$c = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$c,
+  staticRenderFns: __vue_staticRenderFns__$c
+}, __vue_inject_styles__$c, __vue_script__$c, __vue_scope_id__$c, __vue_is_functional_template__$c, __vue_module_identifier__$c, false, createInjector, undefined, undefined);
+
+var script$d = {
+  name: 'ItemCommonUploader',
+  components: {
+    ItemTitle: __vue_component__,
+    CommonUploader: __vue_component__$c
+  },
+  props: {
+    value: {},
+    title: {
+      type: String
+    },
+    titleHint: {
+      type: String
+    },
+
+    /** 上传函数 */
+    httpRequest: {
+      required: true,
+      type: Function
+    },
+
+    /** 是否自动上传 */
+    autoUpload: {
+      type: Boolean,
+      default: true
+    },
+
+    /** 是否通过验证 */
+    isValiate: {
+      type: Boolean,
+      default: true
+    },
+
+    /** 显示星号 */
+    asterisk: {
+      type: Boolean,
+      default: false
+    },
+
+    /** 类型 */
+    type: {
+      type: String,
+      default: 'wechat'
+    },
+
+    /** 接受的文件类型，默认为 image/* ，只支持InputUploader中生效 */
+    accept: {
+      type: String,
+      default: 'image/*'
+    }
+  },
+  data: function data() {
+    return {
+      /** 是否已经上传过图片，当已经上传的情况下，将不会再触发上传。可能存在判断出错的情况 */
+      hasUploaded: false
+    };
+  },
+  computed: {},
+  watch: {},
+  methods: {
+    /**
+     * 添加二维码
+     */
+    onAdd: function onAdd(image) {
+      if (this.autoUpload) {
+        this.upload(image);
+      } else {
+        this.$emit('input', image);
+      }
+    },
+
+    /**
+     * 删除二维码
+     */
+    onRemove: function onRemove() {
+      this.$emit('input', null);
+      this.hasUploaded = false;
+    },
+    onLoad: function onLoad() {
+      this.$emit('load');
+    },
+    onFinish: function onFinish() {
+      this.$emit('finish');
+    },
+
+    /**
+     * 上传流程
+     */
+    upload: function () {
+      var _upload = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(image) {
+        var result;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (!(this.hasUploaded || !image)) {
+                  _context.next = 2;
+                  break;
+                }
+
+                return _context.abrupt("return");
+
+              case 2:
+                _context.next = 4;
+                return this.httpRequest(image);
+
+              case 4:
+                result = _context.sent; // @ts-ignore
+
+                this.$refs.uploader.setImage(result.url);
+                this.$emit('input', result);
+                this.hasUploaded = true;
+
+              case 8:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function upload(_x) {
+        return _upload.apply(this, arguments);
+      }
+
+      return upload;
+    }(),
+
+    /**
+     * 生命周期
+     */
+    beforeSubmit: function () {
+      var _beforeSubmit = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                this.upload();
+
+              case 1:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function beforeSubmit() {
+        return _beforeSubmit.apply(this, arguments);
+      }
+
+      return beforeSubmit;
+    }()
+  },
+  mounted: function mounted() {
+    if (this.value) {
+      // @ts-ignore
+      this.$refs.uploader.setImage(this.value.url); // 如果已经有数据情况下，认为已经上传了
+
+      this.hasUploaded = true;
+    }
+  }
+};
+/* script */
+
+var __vue_script__$d = script$d;
+/* template */
+
+var __vue_render__$d = function __vue_render__() {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _c("div", {
+    staticClass: "item-uploader clearfix"
+  }, [_c("CommonUploader", {
+    ref: "uploader",
+    staticClass: "item-uploader__uploader fr",
+    attrs: {
+      black: !_vm.isValiate,
+      type: _vm.type,
+      accept: _vm.accept
+    },
+    on: {
+      add: _vm.onAdd,
+      remove: _vm.onRemove,
+      load: _vm.onLoad,
+      finish: _vm.onFinish
+    }
+  }), _vm._v(" "), _c("div", {
+    staticClass: "item-uploader__title"
+  }, [_c("ItemTitle", {
+    attrs: {
+      title: _vm.title,
+      titleHint: _vm.titleHint,
+      "is-required": _vm.asterisk
+    }
+  }), _vm._v(" "), _vm.titleHint ? _c("div", {
+    staticClass: "title-hint"
+  }, [_vm._v(_vm._s(_vm.titleHint))]) : _vm._e()], 1)], 1);
+};
+
+var __vue_staticRenderFns__$d = [];
+__vue_render__$d._withStripped = true;
+/* style */
+
+var __vue_inject_styles__$d = function __vue_inject_styles__(inject) {
+  if (!inject) return;
+  inject("data-v-4d107312_0", {
+    source: ".item-uploader {\n  padding: 20px 0 0px;\n  text-align: center;\n}\n.item-uploader .ro-uploader-wrap {\n  width: 72px;\n  height: 72px;\n}\n.item-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image.loaderImg {\n  background-size: cover;\n  background-position: center;\n}\n.item-uploader__uploader {\n  margin-top: 15px;\n}\n.item-uploader__title {\n  padding-right: 10px;\n  font-size: 14px;\n  line-height: 20px;\n  color: #101010;\n  text-align: left;\n  overflow: hidden;\n}\n.item-uploader__title .item-title {\n  padding: 6px 0 0px;\n}\n.item-uploader__title .title-hint {\n  margin-top: 4px;\n  color: #999;\n}\n",
+    map: {
+      "version": 3,
+      "sources": ["commonUploader.vue"],
+      "names": [],
+      "mappings": "AAAA;EACE,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,WAAW;EACX,YAAY;AACd;AACA;EACE,sBAAsB;EACtB,2BAA2B;AAC7B;AACA;EACE,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,eAAe;EACf,iBAAiB;EACjB,cAAc;EACd,gBAAgB;EAChB,gBAAgB;AAClB;AACA;EACE,kBAAkB;AACpB;AACA;EACE,eAAe;EACf,WAAW;AACb",
+      "file": "commonUploader.vue",
+      "sourcesContent": [".item-uploader {\n  padding: 20px 0 0px;\n  text-align: center;\n}\n.item-uploader .ro-uploader-wrap {\n  width: 72px;\n  height: 72px;\n}\n.item-uploader .ro-uploader-wrap .ro-uploader-image-wrap .ro-uploader-image.loaderImg {\n  background-size: cover;\n  background-position: center;\n}\n.item-uploader__uploader {\n  margin-top: 15px;\n}\n.item-uploader__title {\n  padding-right: 10px;\n  font-size: 14px;\n  line-height: 20px;\n  color: #101010;\n  text-align: left;\n  overflow: hidden;\n}\n.item-uploader__title .item-title {\n  padding: 6px 0 0px;\n}\n.item-uploader__title .title-hint {\n  margin-top: 4px;\n  color: #999;\n}\n"]
+    },
+    media: undefined
+  });
+};
+/* scoped */
+
+
+var __vue_scope_id__$d = undefined;
+/* module identifier */
+
+var __vue_module_identifier__$d = undefined;
+/* functional template */
+
+var __vue_is_functional_template__$d = false;
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+var __vue_component__$d = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$d,
+  staticRenderFns: __vue_staticRenderFns__$d
+}, __vue_inject_styles__$d, __vue_script__$d, __vue_scope_id__$d, __vue_is_functional_template__$d, __vue_module_identifier__$d, false, createInjector, undefined, undefined);
+
 exports.ItemButtonGroup = __vue_component__$1;
 exports.ItemCascader = __vue_component__$3;
+exports.ItemCommonUploader = __vue_component__$d;
 exports.ItemInput = __vue_component__$4;
 exports.ItemList = __vue_component__$6;
 exports.ItemMultiUploader = __vue_component__$b;

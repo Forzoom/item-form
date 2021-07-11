@@ -1,6 +1,7 @@
 <template>
+
     <div class="if-comp-uploader" :class="{'blank': blank}">
-        <WechatUploader
+        <WechatUploader v-if="type === 'wechat'"
             ref="uploader"
             :size="1"
             :can-modify="true"
@@ -13,6 +14,20 @@
             @load="onLoad"
             @finish="onFinish">
         </WechatUploader>
+        <InputUploader v-else-if="type === 'input'"
+            ref="uploader"
+            :size="1"
+            :can-modify="true"
+            :accept="accept"
+            :container-class="[ 'loaderImg' ]"
+            :container-style="{ 'opacity': opacity, 'z-index': 1, position: 'relative' }"
+            :request-class="[ 'loaderImg' ]"
+            :image-class="[ 'loaderImg']"
+            @add="onAdd"
+            @remove="onRemove"
+            @load="onLoad"
+            @finish="onFinish">
+        </InputUploader>
         <div class="uploader-mock-background" :style="backgroundStyle">
             <p>
                 <svg class="icon" aria-hidden="true">
@@ -22,19 +37,18 @@
             <p>{{hint}}</p>
         </div>
     </div>
-</template>
 
-<script lang="ts">
+</template>
+<script lang="js">
 import Vue from 'vue';
-import { Component, Prop } from 'vue-property-decorator';
 import {
-    WechatUploaderComponent,
-    WechatImage,
     WechatUploaderFactory,
+    InputUploaderFactory,
 } from '@forzoom/uploader';
 
 // @ts-ignore
 const WechatUploader = WechatUploaderFactory(Vue, { transformWXLocalImageData: true });
+const InputUploader = InputUploaderFactory(Vue);
 
 /**
  * 班级头像上传逻辑
@@ -42,94 +56,120 @@ const WechatUploader = WechatUploaderFactory(Vue, { transformWXLocalImageData: t
  * - @add 数据添加
  * - @remove 数据删除
  */
-@Component({
-    name: 'Uploader',
+export default {
+    name: 'CommonUploader',
+
     components: {
         WechatUploader,
+        InputUploader,
     },
-})
-export default class Uploader extends Vue {
-    /** 提示内容 */
-    @Prop({ type: String }) public hint!: any;
-    /** 背景样式类 */
-    @Prop({ type: [ Object, Array] }) public backgroundStyle!: any;
-    /** 是否未填写 */
-    @Prop({ type: Boolean, default: false }) public blank!: any;
 
-    // 图片内容
-    public image: string | null = null;
+    props: {
+        /** 提示内容 */
+        hint: { type: String },
 
-    public get opacity() {
-        return this.image ? 1 : 0;
-    }
+        /** 背景样式类 */
+        backgroundStyle: { type: [ Object, Array] },
 
-    /**
-     * 获得元素
-     *
-     * @return {} uploader
-     */
-    public getImage() {
-        return this.image;
-    }
-    /**
-     * 设置头像
-     *
-     * @param {} image 头像内容
-     */
-    public setImage(image: string) {
-        const $uploader = this.$refs.uploader as WechatUploaderComponent;
-        $uploader.setImages([
-            {
-                url: image,
-                image,
-                serverId: null,
-            },
-        ]);
-        this.image = image;
-    }
-    /**
-     * 删除当前的图片信息
-     */
-    public removeImage() {
-        const $uploader = this.$refs.uploader as WechatUploaderComponent;
-        $uploader.setImages([]);
-    }
-    /**
-     * 数据开始加载
-     */
-    public onLoad() {
-        this.$emit('load');
-    }
-    /**
-     * 图片加载完成
-     */
-    public onFinish() {
-        this.$emit('finish');
-    }
-    /**
-     * add事件
-     *
-     *  {image, serverId}
-     */
-    public onAdd(...args: WechatImage[]) {
-        const $uploader = this.$refs.uploader as WechatUploaderComponent;
-        const images = $uploader.getImages();
-        this.image = images[0].image;
-        this.$emit('add', ...args);
-    }
-    /**
-     * remove事件
-     *
-     *  {} 可能没有数据
-     */
-    public onRemove(...args: WechatImage[]) {
-        this.image = null;
-        this.$emit('remove', ...args);
-    }
-}
+        /** 是否未填写 */
+        blank: { type: Boolean, default: false },
+
+        /** 类型 */
+        type: { type: String, default: 'wechat' },
+
+        /** 接受的文件类型，默认为 image/* ，只支持InputUploader中生效 */
+        accept: { type: String, default: 'image/*' },
+    },
+
+    data: function data() {
+        return {
+            // 图片内容
+            image: null,
+        };
+    },
+
+    computed: {
+        opacity: function() {
+            return this.image ? 1 : 0;
+        },
+    },
+
+    watch: {},
+
+    methods: {
+        /**
+         * 获得元素
+         *
+         * @return {} uploader
+         */
+        getImage: function() {
+            return this.image;
+        },
+
+        /**
+         * 设置头像
+         *
+         * @param {} image 头像内容
+         */
+        setImage: function(image) {
+            const $uploader = this.$refs.uploader;
+            $uploader.setImages([
+                {
+                    url: image,
+                    image,
+                },
+            ]);
+            this.image = image;
+        },
+
+        /**
+         * 删除当前的图片信息
+         */
+        removeImage: function() {
+            const $uploader = this.$refs.uploader;
+            $uploader.setImages([]);
+        },
+
+        /**
+         * 数据开始加载
+         */
+        onLoad: function() {
+            this.$emit('load');
+        },
+
+        /**
+         * 图片加载完成
+         */
+        onFinish: function() {
+            this.$emit('finish');
+        },
+
+        /**
+         * add事件
+         *
+         *  {image, serverId}
+         */
+        onAdd: function(...args) {
+            const $uploader = this.$refs.uploader;
+            const images = $uploader.getImages();
+            this.image = images[0].url;
+            this.$emit('add', ...args);
+        },
+
+        /**
+         * remove事件
+         *
+         *  {} 可能没有数据
+         */
+        onRemove: function(...args) {
+            this.image = null;
+            this.$emit('remove', ...args);
+        },
+    },
+};
 </script>
-
 <style lang="less">
+
 @import "../../lib/style/mixins.less";
 
 .if-comp-uploader {
@@ -227,4 +267,5 @@ export default class Uploader extends Vue {
         transform: translate(-50%, -50%);
     }
 }
+
 </style>

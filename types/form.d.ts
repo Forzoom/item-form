@@ -118,7 +118,23 @@ export interface ItemMultiUploaderMeta extends FormSection {
     };
 }
 
-export type ItemFormSectionMeta = ItemInputMeta | ItemSelectMeta | ItemCascaderMeta | ItemListMeta | ItemTextareaMeta | ItemButtonGroupMeta | ItemUploaderMeta | ItemMultiUploaderMeta;
+export interface ItemCommonUploader extends FormSection {
+    type: 'ItemCommonUploader';
+    props: {
+        /** 标题 */
+        title?: string;
+        /** 副标题 */
+        titleHint?: string;
+        type?: 'wechat' | 'input';
+        accept?: string;
+        /** 传入类型为 @forzoom/uploader 中的WechatImage和FileImage */
+        httpRequest: (image: any) => ImageInfo | Promise<ImageInfo>;
+        /** 显示星号 */
+        asterisk?: boolean;
+    };
+}
+
+export type ItemFormSectionMeta = ItemInputMeta | ItemSelectMeta | ItemCascaderMeta | ItemListMeta | ItemTextareaMeta | ItemButtonGroupMeta | ItemUploaderMeta | ItemMultiUploaderMeta | ItemCommonUploader;
 
 export interface ValueText {
     value: any;

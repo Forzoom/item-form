@@ -889,10 +889,10 @@
   resolved "https://registry.yarnpkg.com/@forzoom/form-renderer/-/form-renderer-0.1.0.tgz#d26ad7151d0812b2d178e8203a6c2e580843e7e5"
   integrity sha512-3phoQx2JN47iQGQFiUcivVOpaQ4VN3X4gyC0xhNntknUpDxoKBZOLUSPkcfK2Yev3ww7fsD7UnLVECQRU6BYew==
 
-"@forzoom/uploader@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@forzoom/uploader/-/uploader-0.2.1.tgz#9392ac437283c786a09647dbbb110d32430c829b"
-  integrity sha512-wAKBfDnahbZUKY1Q4eToX75J/+32sA7vdknywRxU44BaZDCM7yLlSW8AjfptOscapoUr5LIcFQ42JvOpSixAJw==
+"@forzoom/uploader@0.3.0-rc1":
+  version "0.3.0-rc1"
+  resolved "https://registry.yarnpkg.com/@forzoom/uploader/-/uploader-0.3.0-rc1.tgz#9b9ddca181c3b90f3d5e367857c2c99ba31ebe62"
+  integrity sha512-H8ib1zU8VuuQu2X9z5C+6kjv8Lj6hE6qdF2FH7XeUlsBMONKTInRLPuQJ61OqTPCve59x5zyg9+EipmRGVELaA==
 
 "@rollup/plugin-babel@^5.2.0":
   version "5.2.0"

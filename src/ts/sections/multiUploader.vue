@@ -16,15 +16,20 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
-import { WechatImage, WechatUploaderComponent } from '@forzoom/uploader';
+import Vue from 'vue';
+import { Component, Prop } from 'vue-property-decorator';
+import { WechatImage, WechatUploaderComponent, WechatUploaderFactory } from '@forzoom/uploader';
 import { ImageInfo } from 'types/form';
 import ItemTitle from './title.vue';
+
+// @ts-ignore
+const WechatUploader = WechatUploaderFactory(Vue, { transformWXLocalImageData: true });
 
 @Component({
     name: 'ItemMultiUploader',
     components: {
         ItemTitle,
+        WechatUploader,
     },
 })
 export default class ItemMultiUploader extends Vue {
@@ -64,7 +69,7 @@ export default class ItemMultiUploader extends Vue {
         this.$emit('input', images.map((image) => {
             const info: ImageInfo = {
                 key: image.serverId!,
-                url: image.image,
+                url: image.url,
                 // @ts-ignore
                 mode: image.mode || 'wechat',
             };
@@ -84,8 +89,8 @@ export default class ItemMultiUploader extends Vue {
 
         this.$emit('input', images.map((image) => {
             const info: ImageInfo = {
-                key: image.serverId!,
-                url: image.image,
+                key: image.key!,
+                url: image.url,
                 // @ts-ignore
                 mode: image.mode || 'wechat',
             };
@@ -127,6 +132,8 @@ export default class ItemMultiUploader extends Vue {
                     image: item.url,
                     serverId: item.key,
                     mode: item.mode || 'file',
+                    key: item.key,
+                    url: item.url,
                 };
             }));
         }

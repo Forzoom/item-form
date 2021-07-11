@@ -17,13 +17,19 @@
 
 </template>
 <script lang="js">
+import Vue from 'vue';
+import { WechatUploaderFactory } from '@forzoom/uploader';
 import ItemTitle from './title.vue';
+
+// @ts-ignore
+const WechatUploader = WechatUploaderFactory(Vue, { transformWXLocalImageData: true });
 
 export default {
     name: 'ItemMultiUploader',
 
     components: {
         ItemTitle,
+        WechatUploader,
     },
 
     props: {
@@ -40,6 +46,7 @@ export default {
 
         /** 上传函数 */
         httpRequest: { required: true, type: Function },
+
         /** 显示星号 */
         asterisk: { type: Boolean, default: false },
     },
@@ -78,7 +85,7 @@ export default {
             this.$emit('input', images.map((image) => {
                 const info = {
                     key: image.serverId,
-                    url: image.image,
+                    url: image.url,
                     // @ts-ignore
                     mode: image.mode || 'wechat',
                 };
@@ -99,8 +106,8 @@ export default {
 
             this.$emit('input', images.map((image) => {
                 const info = {
-                    key: image.serverId,
-                    url: image.image,
+                    key: image.key,
+                    url: image.url,
                     // @ts-ignore
                     mode: image.mode || 'wechat',
                 };
@@ -143,6 +150,8 @@ export default {
                     image: item.url,
                     serverId: item.key,
                     mode: item.mode || 'file',
+                    key: item.key,
+                    url: item.url,
                 };
             }));
         }

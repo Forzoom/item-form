@@ -1,3 +1,8 @@
+#### 0.3.0
+
+1. feat: 补充ItemCommonUploader
+1. feat: Uploader相关组件改为由自己注册
+
 #### 0.2.2
 
 1. fix: uploader组件原本显示的是选择的图片内容，现在将显示httpRequest返回的结果

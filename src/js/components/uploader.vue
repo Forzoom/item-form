@@ -26,6 +26,13 @@
 
 </template>
 <script lang="js">
+import Vue from 'vue';
+import {
+    WechatUploaderFactory,
+} from '@forzoom/uploader';
+
+// @ts-ignore
+const WechatUploader = WechatUploaderFactory(Vue, { transformWXLocalImageData: true });
 
 /**
  * 班级头像上传逻辑
@@ -35,6 +42,10 @@
  */
 export default {
     name: 'Uploader',
+
+    components: {
+        WechatUploader,
+    },
 
     props: {
         /** 提示内容 */
@@ -81,6 +92,7 @@ export default {
             const $uploader = this.$refs.uploader;
             $uploader.setImages([
                 {
+                    url: image,
                     image,
                     serverId: null,
                 },
